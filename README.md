@@ -1,6 +1,6 @@
 # Topeka Christian Football Association
 
-A responsive two-page website for TCFA's first season in 2026. The visual identity uses a red, white, and charcoal palette with high school football imagery.
+A responsive two-page website for TCFA's first season in 2026. The visual identity uses a red, white, and charcoal palette with high school football imagery. The Forms page includes the current Participation Application.
 
 ## Run locally
 
