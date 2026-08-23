@@ -5,7 +5,7 @@ type DriveFile = { name: string; type: string; date: string; url: string }
 
 const driveFolderUrl = import.meta.env.VITE_GOOGLE_DRIVE_FOLDER_URL || 'https://drive.google.com/drive/u/0/folders/1iHMpQr3fs_DjzZuyNgRoDZlH5zKqGAG6'
 const driveFeedUrl = import.meta.env.VITE_GOOGLE_DRIVE_FEED_URL || ''
-const applicationEndpoint = import.meta.env.VITE_APPLICATION_FORM_ENDPOINT || ''
+const applicationEndpoint = import.meta.env.VITE_APPLICATION_FORM_ENDPOINT || 'https://script.google.com/macros/s/AKfycbzlg6YNdIQcAaqSUnGa-280Epm_QhEjwnEszEAwvb9GgZi-_jOkkcoXU2aO6_1eGqX2/exec'
 
 const fallbackFiles: DriveFile[] = [
   { name: '2026 Player Registration FINAL.pdf', type: 'Registration', date: 'Aug 04, 2026', url: driveFolderUrl },
