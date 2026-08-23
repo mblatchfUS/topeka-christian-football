@@ -14,18 +14,17 @@ const fallbackFiles: DriveFile[] = [
 ]
 
 function navigate(page: Page) {
-  window.history.pushState({}, '', page === 'home' ? '/' : '/forms')
-  window.dispatchEvent(new PopStateEvent('popstate'))
+  window.location.hash = page === 'home' ? '' : '/forms'
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 function App() {
-  const [page, setPage] = useState<Page>(window.location.pathname.startsWith('/forms') ? 'forms' : 'home')
+  const [page, setPage] = useState<Page>(window.location.pathname.startsWith('/forms') || window.location.hash === '#/forms' ? 'forms' : 'home')
 
   useEffect(() => {
-    const onPopState = () => setPage(window.location.pathname.startsWith('/forms') ? 'forms' : 'home')
-    window.addEventListener('popstate', onPopState)
-    return () => window.removeEventListener('popstate', onPopState)
+    const onHashChange = () => setPage(window.location.hash === '#/forms' ? 'forms' : 'home')
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
 
   return (
