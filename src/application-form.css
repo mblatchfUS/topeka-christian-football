@@ -1,0 +1,22 @@
+.application-section { margin-top: 105px; padding-top: 75px; border-top: 1px solid var(--line); display: grid; grid-template-columns: .7fr 1.3fr; gap: 10%; }
+.application-heading h2 { font: 800 clamp(48px, 6vw, 76px)/.86 'Barlow Condensed'; text-transform: uppercase; margin: 0 0 24px; }
+.application-heading h2 em { color: var(--red); font-style: normal; }
+.application-heading > p:last-child { max-width: 280px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.application-form { border-top: 2px solid var(--ink); }
+.application-form fieldset { border: 0; border-bottom: 1px solid var(--line); padding: 30px 0; margin: 0; }
+.application-form legend { font: 700 25px 'Barlow Condensed'; text-transform: uppercase; margin-bottom: 23px; }
+.application-form label { display: grid; gap: 7px; color: var(--muted); font-size: 11px; font-weight: 700; }
+.application-form input:not([type='checkbox']), .application-form select, .application-form textarea { width: 100%; border: 1px solid #c9c2bb; border-radius: 0; background: #fff; color: var(--ink); padding: 12px; font: 14px 'DM Sans'; }
+.application-form input:focus, .application-form select:focus, .application-form textarea:focus { outline: 2px solid var(--red); outline-offset: 1px; }
+.form-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 20px; }
+.form-grid label:nth-child(4), .form-grid label:nth-child(5), .form-grid label:nth-child(6) { grid-column: span 1; }
+.application-form fieldset > label + label, .application-form fieldset > label + .initial-grid { margin-top: 18px; }
+.initial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 18px 0; }
+.initial-grid input { max-width: 110px; }
+.form-instruction { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.checkbox-label { display: flex !important; grid-template-columns: none !important; grid-template-rows: none !important; grid-auto-flow: column; justify-content: start; align-items: start; gap: 10px !important; line-height: 1.5; font-weight: 500 !important; }
+.checkbox-label input { flex: 0 0 auto; margin-top: 2px; accent-color: var(--red); }
+.submit-button { margin-top: 28px; }
+.submit-button:disabled { cursor: wait; opacity: .65; }
+.form-message { font-size: 13px; font-weight: 700; margin: 20px 0; }.form-message.success { color: #237344; }.form-message.error { color: var(--red); }
+@media (max-width: 700px) { .application-section { display: block; margin-top: 75px; padding-top: 55px; }.application-heading { margin-bottom: 45px; }.form-grid, .initial-grid { grid-template-columns: 1fr; }.form-grid label { grid-column: auto !important; }.application-form fieldset { padding: 25px 0; }.application-form legend { font-size: 22px; } }

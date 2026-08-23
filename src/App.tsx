@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 
 type Page = 'home' | 'forms'
 type DriveFile = { name: string; type: string; date: string; url: string }
 
 const driveFolderUrl = import.meta.env.VITE_GOOGLE_DRIVE_FOLDER_URL || 'https://drive.google.com/drive/u/0/folders/1iHMpQr3fs_DjzZuyNgRoDZlH5zKqGAG6'
 const driveFeedUrl = import.meta.env.VITE_GOOGLE_DRIVE_FEED_URL || ''
+const applicationEndpoint = import.meta.env.VITE_APPLICATION_FORM_ENDPOINT || ''
 
 const fallbackFiles: DriveFile[] = [
   { name: '2026 Player Registration FINAL.pdf', type: 'Registration', date: 'Aug 04, 2026', url: driveFolderUrl },
@@ -82,6 +83,7 @@ function Value({ number, title, text }: { number: string; title: string; text: s
 function FormsPage() {
   const [files, setFiles] = useState<DriveFile[]>(fallbackFiles)
   const [isLive, setIsLive] = useState(false)
+  const [submitState, setSubmitState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
   useEffect(() => {
     if (!driveFeedUrl) return
@@ -91,7 +93,23 @@ function FormsPage() {
     }).catch(() => setIsLive(false))
   }, [])
 
-  return <main className="forms-page page-width"><div className="forms-hero"><div><p className="eyebrow">Season 01 / Family resources</p><h1>Forms &<br /><em>information.</em></h1></div><p className="forms-intro">The latest forms, guides, and policies for the 2026 season, all in one place. Download what you need, then get ready to play.</p></div><div className="drive-status"><span className={isLive ? 'status-dot live' : 'status-dot'} />{isLive ? 'Live from the team Drive' : 'Team Drive folder'}<a href={driveFolderUrl} target="_blank" rel="noreferrer">Open shared folder ↗</a></div><section className="files-section"><div className="files-heading"><h2>Current documents</h2><span>{files.length} files</span></div><div className="file-list">{files.map((file) => <a className="file-row" href={file.url} target="_blank" rel="noreferrer" key={file.name}><span className="file-icon">PDF</span><span className="file-name"><strong>{file.name.replace(' FINAL', '')}</strong><small>{file.type} · {file.date}</small></span><span className="download">Download <b>↓</b></span></a>)}</div></section><section className="final-note"><span className="note-mark">✓</span><div><h3>Only the final word.</h3><p>We keep this page clean: when a document is ready for families, it is marked <strong>FINAL</strong> in the shared Drive and appears here automatically.</p></div></section></main>
+  async function submitApplication(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setSubmitState('sending')
+    const form = new FormData(event.currentTarget)
+    const values = Object.fromEntries(form.entries())
+    try {
+      if (!applicationEndpoint) throw new Error('Application endpoint is not configured')
+      const response = await fetch(applicationEndpoint, { method: 'POST', body: JSON.stringify(values) })
+      if (!response.ok) throw new Error('Application submission failed')
+      event.currentTarget.reset()
+      setSubmitState('sent')
+    } catch {
+      setSubmitState('error')
+    }
+  }
+
+  return <main className="forms-page page-width"><div className="forms-hero"><div><p className="eyebrow">Season 01 / Family resources</p><h1>Forms &<br /><em>information.</em></h1></div><p className="forms-intro">The latest forms, guides, and policies for the 2026 season, all in one place. Download what you need, then get ready to play.</p></div><div className="drive-status"><span className={isLive ? 'status-dot live' : 'status-dot'} />{isLive ? 'Live from the team Drive' : 'Team Drive folder'}<a href={driveFolderUrl} target="_blank" rel="noreferrer">Open shared folder ↗</a></div><section className="files-section"><div className="files-heading"><h2>Current documents</h2><span>{files.length} files</span></div><div className="file-list">{files.map((file) => <a className="file-row" href={file.url} target="_blank" rel="noreferrer" key={file.name}><span className="file-icon">PDF</span><span className="file-name"><strong>{file.name.replace(' FINAL', '')}</strong><small>{file.type} · {file.date}</small></span><span className="download">Download <b>↓</b></span></a>)}</div></section><section className="final-note"><span className="note-mark">✓</span><div><h3>Only the final word.</h3><p>We keep this page clean: when a document is ready for families, it is marked <strong>FINAL</strong> in the shared Drive and appears here automatically.</p></div></section><section className="application-section"><div className="application-heading"><p className="eyebrow">Electronic submission</p><h2>Non-member<br /><em>participation.</em></h2><p>Please complete this application, then submit it for review. You will also need the liability, practice field, and medical waivers.</p></div><form className="application-form" onSubmit={submitApplication}><fieldset><legend>Student information</legend><div className="form-grid"><label>Student name<input name="studentName" required /></label><label>Grade<input name="grade" required /></label><label>Date of birth<input name="dateOfBirth" type="date" required /></label></div><label>Current school status<select name="schoolStatus" required><option value="">Select one</option><option>Homeschooled</option><option>Enrolled in a private school</option><option>Enrolled in a public school</option><option>Other</option></select></label><label>If other, please describe<input name="schoolStatusOther" /></label><label>Activity or activities your student would like to participate in<textarea name="activities" rows={3} required /></label></fieldset><fieldset><legend>Parent or guardian contacts</legend><div className="form-grid"><label>Father's name<input name="fatherName" /></label><label>Father's phone<input name="fatherPhone" type="tel" /></label><label>Father's email<input name="fatherEmail" type="email" /></label><label>Mother's name<input name="motherName" /></label><label>Mother's phone<input name="motherPhone" type="tel" /></label><label>Mother's email<input name="motherEmail" type="email" /></label></div><label>Address<textarea name="address" rows={2} required /></label></fieldset><fieldset><legend>Agreement and sponsorship</legend><p className="form-instruction">Please read the Statement of Faith before submitting this application.</p><div className="initial-grid"><label>Parent initial<input name="statementOfFaithInitialOne" maxLength={5} required /></label><label>Parent initial<input name="statementOfFaithInitialTwo" maxLength={5} required /></label><label>Fee agreement initial<input name="feeAgreementInitial" maxLength={5} required /></label></div><label>Parent signatures<input name="parentSignatures" required /></label><label>Name of sponsor<input name="sponsorName" required /></label><label className="checkbox-label"><input name="eligibilityAcknowledgement" type="checkbox" required /> I understand that it is my family's responsibility to verify eligibility with any other organization where my student participates.</label><label className="checkbox-label"><input name="policiesAcknowledgement" type="checkbox" required /> We have read and agree to the Statement of Faith and agree to pay applicable participation fees.</label></fieldset><button className="button button-red submit-button" type="submit" disabled={submitState === 'sending'}>{submitState === 'sending' ? 'Sending application...' : 'Submit application <span>→</span>'}</button>{submitState === 'sent' && <p className="form-message success">Application submitted successfully.</p>}{submitState === 'error' && <p className="form-message error">Submission is not connected yet. Please contact the association while the form email is being configured.</p>}</form></section></main>
 }
 
 export default App

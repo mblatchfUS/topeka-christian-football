@@ -1,4 +1,5 @@
 const FOLDER_ID = '1iHMpQr3fs_DjzZuyNgRoDZlH5zKqGAG6';
+const APPLICATION_RECIPIENTS = 'blatch76@yahoo.com,jnnfrlyn@yahoo.com,sra3193@gmail.com';
 
 function doGet() {
   const files = DriveApp.getFolderById(FOLDER_ID).getFiles();
@@ -15,4 +16,13 @@ function doGet() {
   }
   results.sort((a, b) => a.name.localeCompare(b.name));
   return ContentService.createTextOutput(JSON.stringify(results)).setMimeType(ContentService.MimeType.JSON);
+}
+
+function doPost(e) {
+  const values = JSON.parse(e.postData.contents);
+  const body = Object.entries(values)
+    .map(([label, value]) => `${label}: ${value}`)
+    .join('\n');
+  MailApp.sendEmail(APPLICATION_RECIPIENTS, 'New TCF Non-Member Participation Application', body);
+  return ContentService.createTextOutput(JSON.stringify({ ok: true })).setMimeType(ContentService.MimeType.JSON);
 }
