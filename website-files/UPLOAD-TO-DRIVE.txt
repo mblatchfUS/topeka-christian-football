@@ -1,0 +1,5 @@
+Upload the contents of this folder to:
+https://drive.google.com/drive/u/0/folders/1zdnlPQUNrBuVnLovkUrNkvzfzJYITL9P
+
+Keep the google-apps-script subdirectory together with Code.gs.
+The production site files are index.html and the assets directory.
