@@ -299,13 +299,14 @@ function FormsPage() {
     event.preventDefault();
     setSubmitState("sending");
     const form = new FormData(event.currentTarget);
-    const values = Object.fromEntries(form.entries());
+    const values = new URLSearchParams();
+    form.forEach((value, key) => values.append(key, String(value)));
     try {
       if (!applicationEndpoint)
         throw new Error("Application endpoint is not configured");
       const response = await fetch(applicationEndpoint, {
         method: "POST",
-        body: JSON.stringify(values),
+        body: values,
       });
       if (!response.ok) throw new Error("Application submission failed");
       event.currentTarget.reset();

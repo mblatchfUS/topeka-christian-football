@@ -21,7 +21,7 @@ function doGet() {
 }
 
 function doPost(e) {
-  const values = JSON.parse(e.postData.contents);
+  const values = e.parameter;
   const studentName = values.studentName || 'Unnamed student';
   const timestamp = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd HHmm');
   const outputName = `TCF Participation Application - ${studentName} - ${timestamp}`;
