@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from "react";
 
-type Page = "home" | "forms";
+type Page = "home" | "forms" | "application";
 type DriveFile = { name: string; type: string; date: string; url: string };
 
 const driveFolderUrl =
@@ -41,21 +41,23 @@ const fallbackFiles: DriveFile[] = [
 ];
 
 function navigate(page: Page) {
-  window.location.hash = page === "home" ? "" : "/forms";
+  window.location.hash = page === "home" ? "" : `/${page}`;
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+function resolvePage(): Page {
+  const { hash, pathname } = window.location;
+  if (hash === "#/application" || pathname.startsWith("/application"))
+    return "application";
+  if (hash === "#/forms" || pathname.startsWith("/forms")) return "forms";
+  return "home";
+}
+
 function App() {
-  const [page, setPage] = useState<Page>(
-    window.location.pathname.startsWith("/forms") ||
-      window.location.hash === "#/forms"
-      ? "forms"
-      : "home",
-  );
+  const [page, setPage] = useState<Page>(resolvePage);
 
   useEffect(() => {
-    const onHashChange = () =>
-      setPage(window.location.hash === "#/forms" ? "forms" : "home");
+    const onHashChange = () => setPage(resolvePage());
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
@@ -87,6 +89,12 @@ function App() {
           >
             Forms & Info
           </button>
+          <button
+            className={page === "application" ? "nav-link active" : "nav-link"}
+            onClick={() => navigate("application")}
+          >
+            Application
+          </button>
           <a
             className="nav-cta"
             href="mailto:football@topekachristianfootball.org"
@@ -96,7 +104,9 @@ function App() {
         </nav>
       </header>
 
-      {page === "home" ? <HomePage /> : <FormsPage />}
+      {page === "home" && <HomePage />}
+      {page === "forms" && <FormsPage />}
+      {page === "application" && <ApplicationPage />}
 
       <footer className="site-footer">
         <div className="footer-brand">
@@ -227,8 +237,11 @@ function HomePage() {
                 <br />
                 to get started.
               </h3>
-              <button className="text-link" onClick={() => navigate("forms")}>
-                View forms & info <span>→</span>
+              <button
+                className="text-link"
+                onClick={() => navigate("application")}
+              >
+                Start the online application <span>→</span>
               </button>
             </div>
           </div>
@@ -278,9 +291,6 @@ function Value({
 function FormsPage() {
   const [files, setFiles] = useState<DriveFile[]>(fallbackFiles);
   const [isLive, setIsLive] = useState(false);
-  const [submitState, setSubmitState] = useState<
-    "idle" | "sending" | "sent" | "error"
-  >("idle");
 
   useEffect(() => {
     if (!driveFeedUrl) return;
@@ -294,27 +304,6 @@ function FormsPage() {
       })
       .catch(() => setIsLive(false));
   }, []);
-
-  async function submitApplication(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSubmitState("sending");
-    const form = new FormData(event.currentTarget);
-    const values = new URLSearchParams();
-    form.forEach((value, key) => values.append(key, String(value)));
-    try {
-      if (!applicationEndpoint)
-        throw new Error("Application endpoint is not configured");
-      const response = await fetch(applicationEndpoint, {
-        method: "POST",
-        body: values,
-      });
-      if (!response.ok) throw new Error("Application submission failed");
-      event.currentTarget.reset();
-      setSubmitState("sent");
-    } catch {
-      setSubmitState("error");
-    }
-  }
 
   return (
     <main className="forms-page page-width">
@@ -377,17 +366,91 @@ function FormsPage() {
           </p>
         </div>
       </section>
-      <section className="application-section">
-        <div className="application-heading">
-          <p className="eyebrow">Electronic submission</p>
-          <h2>
+      <section className="final-note">
+        <span className="note-mark">→</span>
+        <div>
+          <h3>Ready to sign up?</h3>
+          <p>
+            Complete the <strong>participation application</strong> online—it
+            only takes a few minutes.{" "}
+            <button
+              className="text-link"
+              onClick={() => navigate("application")}
+            >
+              Open the application <span>→</span>
+            </button>
+          </p>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function ApplicationPage() {
+  const [submitState, setSubmitState] = useState<
+    "idle" | "sending" | "sent" | "error"
+  >("idle");
+  const [submitError, setSubmitError] = useState("");
+
+  async function submitApplication(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formElement = event.currentTarget;
+    setSubmitState("sending");
+    setSubmitError("");
+    const form = new FormData(formElement);
+    const values = new URLSearchParams();
+    form.forEach((value, key) => values.append(key, String(value)));
+    try {
+      if (!applicationEndpoint)
+        throw new Error("Application endpoint is not configured.");
+      const response = await fetch(applicationEndpoint, {
+        method: "POST",
+        body: values,
+      });
+      const result = await response
+        .json()
+        .catch(() => ({ ok: response.ok }) as { ok: boolean; error?: string });
+      if (!response.ok || result.ok === false)
+        throw new Error(result.error || "Application submission failed.");
+      formElement.reset();
+      setSubmitState("sent");
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : String(error));
+      setSubmitState("error");
+    }
+  }
+
+  return (
+    <main className="forms-page page-width">
+      <div className="forms-hero">
+        <div>
+          <p className="eyebrow">Season 01 / Player sign-up</p>
+          <h1>
             Participation
             <br />
             <em>application.</em>
+          </h1>
+        </div>
+        <p className="forms-intro">
+          Complete this application, then submit it for review. You will also
+          need the liability, practice field, and medical waivers from the{" "}
+          <button className="text-link" onClick={() => navigate("forms")}>
+            Forms &amp; Info
+          </button>{" "}
+          page.
+        </p>
+      </div>
+      <section className="application-section application-section--standalone">
+        <div className="application-heading">
+          <p className="eyebrow">Electronic submission</p>
+          <h2>
+            Player
+            <br />
+            <em>details.</em>
           </h2>
           <p>
-            Please complete this application, then submit it for review. You
-            will also need the liability, practice field, and medical waivers.
+            Please read the Statement of Faith before submitting. A copy of the
+            completed application is emailed to the association for review.
           </p>
         </div>
         <form className="application-form" onSubmit={submitApplication}>
@@ -517,14 +580,20 @@ function FormsPage() {
               : "Submit application →"}
           </button>
           {submitState === "sent" && (
-            <p className="form-message success">
-              Application submitted successfully.
+            <p className="form-message success" role="status">
+              Application submitted successfully. The association has been
+              emailed a copy for review.
             </p>
           )}
           {submitState === "error" && (
-            <p className="form-message error">
-              Submission is not connected yet. Please contact the association
-              while the form email is being configured.
+            <p className="form-message error" role="alert">
+              We couldn't submit your application
+              {submitError ? `: ${submitError}` : "."} Please try again, or
+              email{" "}
+              <a href="mailto:football@topekachristianfootball.org">
+                football@topekachristianfootball.org
+              </a>
+              .
             </p>
           )}
         </form>
