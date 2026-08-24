@@ -3,6 +3,29 @@ const APPLICATION_RECIPIENTS = 'blatch76@yahoo.com';
 const APPLICATION_TEMPLATE_ID = '1YeZwCaHa4W37h8SyO-zSvm16CFx69G6Ebpzt0r9Rqn8';
 const APPLICATION_OUTPUT_FOLDER_ID = '193dbmP0F0bUr_Xep2F1FtjNUCkxM8SG-';
 
+// Friendly labels for the appended summary and email. Field names not listed
+// here fall back to a humanized version of the key.
+const FIELD_LABELS = {
+  studentName: 'Student name',
+  grade: 'Grade',
+  dateOfBirth: 'Date of birth',
+  schoolStatus: 'School status',
+  schoolStatusOther: 'School status (other)',
+  fatherName: "Father's name",
+  fatherPhone: "Father's phone",
+  fatherEmail: "Father's email",
+  motherName: "Mother's name",
+  motherPhone: "Mother's phone",
+  motherEmail: "Mother's email",
+  address: 'Address',
+  statementOfFaithInitialOne: 'Statement of Faith initial (1)',
+  statementOfFaithInitialTwo: 'Statement of Faith initial (2)',
+  feeAgreementInitial: 'Fee agreement initial',
+  volunteerInitial: 'Volunteer initial',
+  parentSignatures: 'Parent signatures',
+  sponsorName: 'Sponsor name',
+};
+
 function doGet() {
   const files = DriveApp.getFolderById(FOLDER_ID).getFiles();
   const results = [];
@@ -32,18 +55,20 @@ function doPost(e) {
     const document = DocumentApp.openById(documentFile.getId());
     const documentBody = document.getBody();
 
-    Object.entries(values).forEach(([label, value]) => {
-      documentBody.replaceText(`\\{\\{${label}\\}\\}`, displayValue_(value));
+    Object.entries(values).forEach(([field, value]) => {
+      documentBody.replaceText(`\\{\\{${field}\\}\\}`, displayValue_(value));
     });
+
+    const summary = Object.entries(values).filter(([, value]) => String(value).trim() !== '');
     documentBody.appendParagraph('');
     documentBody.appendParagraph('Submitted application details').setHeading(DocumentApp.ParagraphHeading.HEADING2);
-    Object.entries(values).forEach(([label, value]) => {
-      documentBody.appendParagraph(`${label}: ${displayValue_(value)}`);
+    summary.forEach(([field, value]) => {
+      documentBody.appendParagraph(`${labelFor_(field)}: ${displayValue_(value)}`);
     });
     document.saveAndClose();
 
-    const bodyText = Object.entries(values)
-      .map(([label, value]) => `${label}: ${displayValue_(value)}`)
+    const bodyText = summary
+      .map(([field, value]) => `${labelFor_(field)}: ${displayValue_(value)}`)
       .join('\n');
     MailApp.sendEmail(APPLICATION_RECIPIENTS, 'New TCF Participation Application', `${bodyText}\n\nCreated document: ${documentFile.getUrl()}`);
 
@@ -85,6 +110,13 @@ function copyTemplateAsDoc_(outputName, outputFolder) {
 
 function displayValue_(value) {
   return value === 'on' ? 'Yes' : String(value);
+}
+
+function labelFor_(field) {
+  if (FIELD_LABELS[field]) return FIELD_LABELS[field];
+  // Humanize an unknown camelCase field name, e.g. "someField" -> "Some field".
+  const spaced = field.replace(/([A-Z])/g, ' $1').toLowerCase().trim();
+  return spaced.charAt(0).toUpperCase() + spaced.slice(1);
 }
 
 function json_(payload) {
