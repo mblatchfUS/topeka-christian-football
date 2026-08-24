@@ -17,3 +17,42 @@ nav { display: flex; align-items: center; gap: clamp(18px, 3vw, 46px); }.nav-lin
 	background-image: url('https://images.unsplash.com/photo-1566577739112-5180d4bf9390?auto=format&fit=crop&w=1200&q=85') !important;
 	background-position: center;
 }
+
+/* 2026 Season page */
+.season-page { padding: 95px 0 130px; min-height: calc(100vh - 86px); }
+.season-stats { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); margin: 34px 0 0; }
+.season-stat { padding: 26px 0; border-right: 1px solid var(--line); }
+.season-stat:last-child { border-right: 0; }
+.season-stat strong { display: block; font: 800 46px 'Barlow Condensed'; line-height: 1; }
+.season-stat small { display: block; margin-top: 8px; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); }
+.schedule-section, .roster-section { padding-top: 80px; }
+.schedule { border-top: 2px solid var(--ink); }
+.schedule-row { display: grid; grid-template-columns: 92px 1fr auto; align-items: center; gap: 22px; padding: 20px 12px; border-bottom: 1px solid var(--line); }
+.schedule-row.is-home { background: #efe9e3; }
+.schedule-date { text-align: center; }
+.schedule-date strong { display: block; font: 800 34px 'Barlow Condensed'; line-height: .9; }
+.schedule-date small { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); }
+.schedule-matchup { display: grid; gap: 6px; }
+.schedule-matchup strong { font: 700 22px 'Barlow Condensed'; text-transform: uppercase; letter-spacing: .3px; }
+.schedule-matchup small { font-size: 12px; color: var(--muted); line-height: 1.4; }
+.place-tag { justify-self: start; font: 700 9px 'DM Sans'; text-transform: uppercase; letter-spacing: 1.5px; padding: 4px 8px; }
+.place-tag.home { background: var(--red); color: #fff; }
+.place-tag.away { border: 1px solid #c9c2bb; color: var(--muted); }
+.schedule-result { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); font-weight: 700; white-space: nowrap; }
+.roster-table { width: 100%; border-collapse: collapse; border-top: 2px solid var(--ink); }
+.roster-table th { text-align: left; font: 700 10px 'DM Sans'; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); padding: 14px 12px; border-bottom: 1px solid var(--line); }
+.roster-table td { padding: 16px 12px; border-bottom: 1px solid var(--line); font-size: 14px; }
+.roster-table tbody tr:hover, .roster-table tbody tr:hover { background: #efe9e3; }
+.roster-empty { display: flex; gap: 18px; padding: 34px; background: #e8e2dc; }
+.roster-empty .note-mark { flex: 0 0 auto; }
+.roster-empty h3 { font: 700 27px 'Barlow Condensed'; text-transform: uppercase; margin: 0 0 8px; }
+.roster-empty p { margin: 0 0 22px; font-size: 14px; line-height: 1.6; color: var(--muted); max-width: 460px; }
+
+@media (max-width: 700px) {
+	.season-page { padding-top: 65px; }
+	.season-stat strong { font-size: 34px; }
+	.schedule-section, .roster-section { padding-top: 55px; }
+	.schedule-row { grid-template-columns: 60px 1fr; row-gap: 10px; padding: 18px 3px; }
+	.schedule-result { grid-column: 2; justify-self: start; }
+	.roster-empty { flex-direction: column; padding: 22px; }
+}

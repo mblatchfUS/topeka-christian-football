@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from "react";
 
-type Page = "home" | "forms" | "application";
+type Page = "home" | "forms" | "application" | "season";
 type DriveFile = { name: string; type: string; date: string; url: string };
 
 const driveFolderUrl =
@@ -37,6 +37,7 @@ function resolvePage(): Page {
   const { hash, pathname } = window.location;
   if (hash === "#/application" || pathname.startsWith("/application"))
     return "application";
+  if (hash === "#/season" || pathname.startsWith("/season")) return "season";
   if (hash === "#/forms" || pathname.startsWith("/forms")) return "forms";
   return "home";
 }
@@ -72,6 +73,12 @@ function App() {
             Home
           </button>
           <button
+            className={page === "season" ? "nav-link active" : "nav-link"}
+            onClick={() => navigate("season")}
+          >
+            2026 Season
+          </button>
+          <button
             className={page === "forms" ? "nav-link active" : "nav-link"}
             onClick={() => navigate("forms")}
           >
@@ -93,6 +100,7 @@ function App() {
       </header>
 
       {page === "home" && <HomePage />}
+      {page === "season" && <SeasonPage />}
       {page === "forms" && <FormsPage />}
       {page === "application" && <ApplicationPage />}
 
@@ -143,9 +151,12 @@ function HomePage() {
             >
               Get season forms <span>↓</span>
             </button>
-            <a className="text-link light" href="#season">
-              Meet the club <span>↓</span>
-            </a>
+            <button
+              className="text-link light"
+              onClick={() => navigate("season")}
+            >
+              2026 schedule <span>→</span>
+            </button>
           </div>
         </div>
         <div className="hero-stamp">
@@ -273,6 +284,212 @@ function Value({
       <h3>{title}</h3>
       <p>{text}</p>
     </article>
+  );
+}
+
+type Game = {
+  day: string;
+  month: string;
+  opponent: string;
+  place: "Home" | "Away";
+  detail: string;
+  result?: string;
+};
+
+type Player = {
+  number: string;
+  name: string;
+  position: string;
+  grade: string;
+};
+
+const schedule: Game[] = [
+  {
+    day: "28",
+    month: "Aug",
+    opponent: "KC East",
+    place: "Away",
+    detail: "Varsity · 7:00 PM",
+  },
+  {
+    day: "11",
+    month: "Sep",
+    opponent: "Northland Christian",
+    place: "Away",
+    detail: "Varsity · 7:00 PM",
+  },
+  {
+    day: "18",
+    month: "Sep",
+    opponent: "Sunrise",
+    place: "Home",
+    detail: "Homecoming · Alumni game 5:00 PM · Varsity 7:00 PM",
+  },
+  {
+    day: "25",
+    month: "Sep",
+    opponent: "Life Prep",
+    place: "Home",
+    detail: "Senior Night · Homecoming · Varsity 7:00 PM",
+  },
+  {
+    day: "3",
+    month: "Oct",
+    opponent: "Joplin Cornerstone",
+    place: "Away",
+    detail: "Time TBA",
+  },
+  {
+    day: "9",
+    month: "Oct",
+    opponent: "Wichita Defenders",
+    place: "Away",
+    detail: "Varsity · 7:00 PM",
+  },
+  {
+    day: "23",
+    month: "Oct",
+    opponent: "Manhattan",
+    place: "Away",
+    detail: "Varsity · 7:00 PM",
+  },
+];
+
+// Roster is confirmed closer to kickoff. Add players here to populate the
+// table below; an empty list renders the "coming soon" state.
+const roster: Player[] = [];
+
+function SeasonPage() {
+  const wins = schedule.filter((game) => game.result?.startsWith("W")).length;
+  const losses = schedule.filter((game) => game.result?.startsWith("L")).length;
+  const homeGames = schedule.filter((game) => game.place === "Home").length;
+
+  return (
+    <main className="season-page page-width">
+      <div className="forms-hero">
+        <div>
+          <p className="eyebrow">Season one / 2026</p>
+          <h1>
+            2026
+            <br />
+            <em>season.</em>
+          </h1>
+        </div>
+        <p className="forms-intro">
+          Seven games, one brotherhood. Home field is Bennett Field, Lawrence KS
+          — 1470 N 1000 Rd, 66046. Come loud, come faithful.
+        </p>
+      </div>
+
+      <div className="season-stats">
+        <div className="season-stat">
+          <strong>
+            {wins}–{losses}
+          </strong>
+          <small>Record</small>
+        </div>
+        <div className="season-stat">
+          <strong>{schedule.length}</strong>
+          <small>Games</small>
+        </div>
+        <div className="season-stat">
+          <strong>{homeGames}</strong>
+          <small>Home games</small>
+        </div>
+      </div>
+
+      <section className="schedule-section">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">The slate</p>
+            <h2>Schedule &amp; results.</h2>
+          </div>
+          <span className="heading-note">Home field · Bennett Field</span>
+        </div>
+        <div className="schedule">
+          {schedule.map((game) => (
+            <div
+              className={
+                game.place === "Home"
+                  ? "schedule-row is-home"
+                  : "schedule-row"
+              }
+              key={`${game.month}-${game.day}`}
+            >
+              <div className="schedule-date">
+                <strong>{game.day}</strong>
+                <small>{game.month}</small>
+              </div>
+              <div className="schedule-matchup">
+                <span
+                  className={
+                    game.place === "Home" ? "place-tag home" : "place-tag away"
+                  }
+                >
+                  {game.place}
+                </span>
+                <strong>
+                  {game.place === "Home" ? "vs" : "at"} {game.opponent}
+                </strong>
+                <small>{game.detail}</small>
+              </div>
+              <div className="schedule-result">
+                {game.result ?? "Upcoming"}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="roster-section">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">Team</p>
+            <h2>2026 roster.</h2>
+          </div>
+          <span className="heading-note">Announced before kickoff</span>
+        </div>
+        {roster.length > 0 ? (
+          <table className="roster-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Player</th>
+                <th>Position</th>
+                <th>Grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              {roster.map((player) => (
+                <tr key={player.number + player.name}>
+                  <td>{player.number}</td>
+                  <td>{player.name}</td>
+                  <td>{player.position}</td>
+                  <td>{player.grade}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div className="roster-empty">
+            <span className="note-mark">★</span>
+            <div>
+              <h3>Roster coming soon.</h3>
+              <p>
+                Players are still being confirmed for the season. Want to be on
+                it? Complete the participation application to claim your spot.
+              </p>
+              <button
+                className="button button-red"
+                onClick={() => navigate("application")}
+              >
+                Start the application <span>→</span>
+              </button>
+            </div>
+          </div>
+        )}
+      </section>
+    </main>
   );
 }
 
