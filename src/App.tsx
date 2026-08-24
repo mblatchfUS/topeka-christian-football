@@ -124,7 +124,9 @@ function App() {
 }
 
 function HomePage() {
+  const [faithOpen, setFaithOpen] = useState(false);
   return (
+    <>
     <main>
       <section className="hero">
         <div
@@ -142,7 +144,7 @@ function HomePage() {
           </h1>
           <p className="hero-lede">
             A new football club for Christian homeschool families across Topeka.
-            Play hard. Live faithfully. Leave it all on the field.
+            Play hard. Live faithfully. Leave it all on the field. "Get a little better every day!"
           </p>
           <div className="hero-actions">
             <button
@@ -204,6 +206,8 @@ function HomePage() {
             number="01"
             title="Faith"
             text="We compete with character and keep our purpose bigger than the scoreboard."
+            linkLabel="Read our Statement of Faith"
+            onLink={() => setFaithOpen(true)}
           />
           <Value
             number="02"
@@ -266,6 +270,8 @@ function HomePage() {
         </div>
       </section>
     </main>
+    <StatementOfFaithModal open={faithOpen} onClose={() => setFaithOpen(false)} />
+    </>
   );
 }
 
@@ -273,17 +279,194 @@ function Value({
   number,
   title,
   text,
+  linkLabel,
+  onLink,
 }: {
   number: string;
   title: string;
   text: string;
+  linkLabel?: string;
+  onLink?: () => void;
 }) {
   return (
     <article className="value">
       <span className="value-number">{number}</span>
       <h3>{title}</h3>
       <p>{text}</p>
+      {linkLabel && onLink && (
+        <button className="value-link" onClick={onLink}>
+          {linkLabel} <span>→</span>
+        </button>
+      )}
     </article>
+  );
+}
+
+const statementOfFaithUrl =
+  "https://drive.google.com/file/d/14nkyYbz3dOHqIRd4A_0xlwGkw8WRrABa/view";
+
+const statementOfFaithBeliefs: { title: string; body: string; refs: string }[] =
+  [
+    {
+      title: "The Holy Scriptures",
+      body: "We believe the Bible to be the only fully inspired, infallible, inerrant, and authoritative written Word of God.",
+      refs: "2 Timothy 3:16; 2 Peter 1:21",
+    },
+    {
+      title: "The Triune God",
+      body: "We believe that there is one God, eternally existent in three persons: Father, Son, and Holy Spirit.",
+      refs: "Genesis 1:1; John 10:30, 37, 38",
+    },
+    {
+      title: "The Lord Jesus Christ",
+      body: "We believe in the full deity and full humanity of our Lord Jesus Christ, in His virgin birth, in His sinless life, in His miracles, in His vicarious and substitutionary atonement through His shed blood, in His bodily resurrection, in His ascension to the right hand of the Father, and in His personal return in power and glory.",
+      refs: "Isaiah 7:14; Matthew 1:23; Luke 1:35; Hebrews 4:15, 7:25, 9:12; John 2:11, 11:25; Colossians 1:14; Acts 1:11; Revelation 19:11, 16",
+    },
+    {
+      title: "Atonement & Salvation",
+      body: "We believe that the human race is fallen in Adam and that the salvation of lost and sinful man depends upon the substitutionary death of Jesus Christ and is made effectual by grace through faith.",
+      refs: "Romans 3:23; John 3:16, 19, 4:24; Ephesians 2:8-9; Titus 3:5-6",
+    },
+    {
+      title: "The Holy Spirit",
+      body: "We believe in the present ministry of the Holy Spirit, by whose indwelling and filling the Christian is enabled to live a godly life.",
+      refs: "Ephesians 5:18, 4:30; 1 Corinthians 3:16, 6:19-20",
+    },
+    {
+      title: "Eternal Resurrection",
+      body: "We believe in the resurrection of both the saved and the lost; they who are saved unto the resurrection of life and they who are lost unto the resurrection of damnation.",
+      refs: "John 5:28, 29",
+    },
+    {
+      title: "The Body of Christ",
+      body: "We believe in the spiritual unity of believers in our Lord Jesus Christ. We believe that all disciples are called to attend, worship, and serve Him in a local congregation or fellowship that is part of His Body, the Church.",
+      refs: "Romans 8:9; 1 Corinthians 12:12, 13; Galatians 3:26, 28",
+    },
+    {
+      title: "Parental Stewardship & Authority",
+      body: "We hold as belief and conviction that children are given by God as a stewardship to the parent and not the state, and that parents have the primary responsibility and authority to teach, educate, and train their own children.",
+      refs: "Proverbs 22:6; Deuteronomy 6:6-7; Ephesians 6:4; Psalms 127:3-5",
+    },
+    {
+      title: "Sanctity of Life",
+      body: "We believe that man was created in the image of God and that, from the moment of conception, each bears His image.",
+      refs: "Genesis 1:26-28, 5:1-2",
+    },
+    {
+      title: "Christian Marriage",
+      body: "We believe marriage constitutes the union between one biological man and one biological woman.",
+      refs: "Genesis 2:22-24; Matthew 19:4-6; Hebrews 13:4-7; Mark 10:6-9; 1 Corinthians 7:10-16",
+    },
+    {
+      title: "Moral Conduct & Sexual Integrity",
+      body: "We believe that sexual immorality, defined as those sexual acts committed outside of marriage, is prohibited and sinful. Such acts include, but are not limited to: adultery, fornication, incest, prostitution, pedophilia, polygamy, and same-sex acts or relationships.",
+      refs: "Exodus 20:14; Leviticus 18:7-23, 20:10-21; Deuteronomy 5:18; Matthew 15:19, 5:27-28; Romans 1:26-27; Colossians 3:5; Ephesians 4:17-19; Galatians 5:19; Hebrews 13:4; 1 Thessalonians 4:3; 1 Corinthians 6:9-13",
+    },
+    {
+      title: "Biological Sex & Gender Identity",
+      body: "We believe that God created mankind in His image: male (man) and female (woman), sexually different but with equal personal and human dignity. Attempts to physically alter or disagree with one’s predetermined biological sex, including but not limited to elective sex reassignment, transvestite, transgender, or non-binary “gender-queer” acts or conduct, are prohibited and sinful.",
+      refs: "Genesis 1:26-28; Romans 1:26-32; 1 Corinthians 6:9-11",
+    },
+    {
+      title: "Design of Human Sexuality",
+      body: "We believe that God created and ordered human sexuality to the permanent, exclusive, comprehensive, and conjugal “one-flesh” union of a biologically ordered man and biologically ordered woman, intrinsically ordered to procreation and the biological family, and in furtherance of the moral, spiritual, and public good of binding father, mother, and child. Consequently, we affirm the sexual complementarity of man and woman, and resolve to resist same-sex attractions and refrain from same-sex acts or conduct, which are intrinsically disordered.",
+      refs: "Genesis 1:27, 2:24; Matthew 19:4-6; Mark 10:5-9; Romans 1:26-27; 1 Corinthians 6:9-11; Ephesians 5:25-27; Revelation 19:7-9, 21:2",
+    },
+  ];
+
+function StatementOfFaithModal({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div
+        className="modal-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="sof-title"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="modal-close" onClick={onClose} aria-label="Close">
+          ✕
+        </button>
+        <div className="modal-head">
+          <p className="eyebrow">Topeka Christian Football</p>
+          <h2 id="sof-title">Statement of Faith &amp; Core Beliefs</h2>
+          <p className="modal-sub">Adopted August 25, 2026</p>
+        </div>
+        <div className="modal-body">
+          <p className="modal-lede">
+            As an independent, Christ-centered youth athletic ministry, Topeka
+            Christian Football is founded upon the eternal truths of the
+            Christian faith. We operate not merely as an athletic organization,
+            but as a discipleship ministry designed to build Christian
+            character, mentor youth, and cultivate spiritual discipline to the
+            glory of God. All directors, coordinators, coaches, and volunteer
+            staff must subscribe to and uphold this Statement of Faith in its
+            entirety. Furthermore, participating players and their parents or
+            legal guardians must acknowledge, respect, and commit to aligning
+            with this statement as a condition of their participation in the
+            Topeka Christian Football program.
+          </p>
+          <ol className="sof-list">
+            {statementOfFaithBeliefs.map((b) => (
+              <li key={b.title}>
+                <h3>{b.title}</h3>
+                <p>{b.body}</p>
+                <span className="sof-refs">{b.refs}</span>
+              </li>
+            ))}
+          </ol>
+          <div className="sof-principle">
+            <h3>Core Ministry Principle</h3>
+            <p>
+              Topeka Christian Football exists to teach youth to do hard things,
+              develop physical perseverance, and foster Christian brotherhood.
+              On and off the field, our coaching staff is committed to investing
+              in these young men to help them grow into faithful, sacrificial
+              leaders. Our defining daily operational focus and team prayer is
+              “getting a little better every day.”
+            </p>
+          </div>
+          <p className="sof-covenant">
+            Participation requires a signed acknowledgement and covenant
+            commitment, completed with the participation application.
+          </p>
+        </div>
+        <div className="modal-foot">
+          <a
+            className="text-link"
+            href={statementOfFaithUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open the full document <span>↗</span>
+          </a>
+          <button className="button button-red" onClick={onClose}>
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
