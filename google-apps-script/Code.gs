@@ -1,5 +1,5 @@
 const FOLDER_ID = '1iHMpQr3fs_DjzZuyNgRoDZlH5zKqGAG6';
-const APPLICATION_RECIPIENTS = 'blatch76@yahoo.com,jnnfrlyn@yahoo.com,sra3193@gmail.com';
+const APPLICATION_RECIPIENTS = 'blatch76@yahoo.com';
 const APPLICATION_TEMPLATE_ID = '1dvsDEc34UKI9HV9yeYXNW5B9dIsxUo00';
 const APPLICATION_OUTPUT_FOLDER_ID = '193dbmP0F0bUr_Xep2F1FtjNUCkxM8SG-';
 

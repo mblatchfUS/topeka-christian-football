@@ -9,7 +9,9 @@ const driveFolderUrl =
 const driveFeedUrl = import.meta.env.VITE_GOOGLE_DRIVE_FEED_URL || "";
 const applicationEndpoint =
   import.meta.env.VITE_APPLICATION_FORM_ENDPOINT ||
-  "https://script.google.com/macros/s/AKfycbzlg6YNdIQcAaqSUnGa-280Epm_QhEjwnEszEAwvb9GgZi-_jOkkcoXU2aO6_1eGqX2/exec";
+  "https://script.google.com/macros/s/AKfycbzgTXntnRHSInZG_iGZ9MhVmqctteuT0RNv6vHt8TMHNcgCck9tUsq-Y5SWV5_AOH2C/exec";
+
+// Additional context for email recipients
 
 const fallbackFiles: DriveFile[] = [
   {
