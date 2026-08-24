@@ -1,4 +1,4 @@
-const FOLDER_ID = '1iHMpQr3fs_DjzZuyNgRoDZlH5zKqGAG6';
+const FOLDER_ID = '1LUWgtON4iBmO7InVzofRbVWTz6V39YW7';
 const APPLICATION_RECIPIENTS = 'blatch76@yahoo.com';
 const APPLICATION_TEMPLATE_ID = '1YeZwCaHa4W37h8SyO-zSvm16CFx69G6Ebpzt0r9Rqn8';
 const APPLICATION_OUTPUT_FOLDER_ID = '193dbmP0F0bUr_Xep2F1FtjNUCkxM8SG-';
@@ -28,19 +28,44 @@ const FIELD_LABELS = {
 
 function doGet() {
   const files = DriveApp.getFolderById(FOLDER_ID).getFiles();
-  const results = [];
+  // Deduplicate by normalized name (extension ignored) so the same document in
+  // multiple formats/versions collapses to a single row, keeping the newest.
+  const byKey = {};
   while (files.hasNext()) {
     const file = files.next();
-    if (!file.getName().toUpperCase().includes('FINAL')) continue;
-    results.push({
-      name: file.getName(),
-      type: file.getMimeType().includes('pdf') ? 'PDF' : 'Document',
-      date: Utilities.formatDate(file.getLastUpdated(), Session.getScriptTimeZone(), 'MMM dd, yyyy'),
-      url: file.getUrl(),
-    });
+    const name = file.getName();
+    if (!name.toUpperCase().includes('FINAL')) continue;
+    // The Participant application Google Doc is the template used to populate
+    // submissions from the online form, so it is never listed for download.
+    // The .docx version is the family-facing copy and is kept below.
+    if (file.getId() === APPLICATION_TEMPLATE_ID) continue;
+
+    const updated = file.getLastUpdated();
+    const key = normalizeName_(name);
+    const existing = byKey[key];
+    if (!existing || updated.getTime() > existing.updated.getTime()) {
+      byKey[key] = {
+        name: name,
+        type: file.getMimeType().includes('pdf') ? 'PDF' : 'Document',
+        date: Utilities.formatDate(updated, Session.getScriptTimeZone(), 'MMM dd, yyyy'),
+        url: file.getUrl(),
+        updated: updated,
+      };
+    }
   }
-  results.sort((a, b) => a.name.localeCompare(b.name));
+  const results = Object.keys(byKey)
+    .map((key) => {
+      const item = byKey[key];
+      return { name: item.name, type: item.type, date: item.date, url: item.url };
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
   return ContentService.createTextOutput(JSON.stringify(results)).setMimeType(ContentService.MimeType.JSON);
+}
+
+// Strips a trailing file extension so "<name>" and "<name>.docx" collapse to
+// the same key when deduplicating multiple versions of one document.
+function normalizeName_(name) {
+  return name.replace(/\.[^.\s]+$/, '').trim().toLowerCase();
 }
 
 function doPost(e) {

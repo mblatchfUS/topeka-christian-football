@@ -14,7 +14,13 @@
 .application-form fieldset > label + label, .application-form fieldset > label + .initial-grid { margin-top: 18px; }
 .initial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 18px 0; }
 .initial-grid input { max-width: 110px; }
+.form-grid--pair { grid-template-columns: repeat(2, 1fr); }
 .form-instruction { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.form-note { font-size: 12px; color: var(--muted); line-height: 1.55; margin: 14px 0 0; }
+.agreement { margin: 22px 0; }
+.agreement > p { margin: 0; font-size: 13px; font-weight: 500; color: var(--ink); line-height: 1.5; }
+.agreement .initial-grid { margin: 12px 0 0; }
+.application-form fieldset > .agreement + label { margin-top: 22px; }
 .checkbox-label { display: flex !important; grid-template-columns: none !important; grid-template-rows: none !important; grid-auto-flow: column; justify-content: start; align-items: start; gap: 10px !important; line-height: 1.5; font-weight: 500 !important; }
 .checkbox-label input { flex: 0 0 auto; margin-top: 2px; accent-color: var(--red); }
 .submit-button { margin-top: 28px; }

@@ -5,7 +5,7 @@ type DriveFile = { name: string; type: string; date: string; url: string };
 
 const driveFolderUrl =
   import.meta.env.VITE_GOOGLE_DRIVE_FOLDER_URL ||
-  "https://drive.google.com/drive/u/0/folders/1iHMpQr3fs_DjzZuyNgRoDZlH5zKqGAG6";
+  "https://drive.google.com/drive/folders/1LUWgtON4iBmO7InVzofRbVWTz6V39YW7";
 const driveFeedUrl = import.meta.env.VITE_GOOGLE_DRIVE_FEED_URL || "";
 const applicationEndpoint =
   import.meta.env.VITE_APPLICATION_FORM_ENDPOINT ||
@@ -15,28 +15,16 @@ const applicationEndpoint =
 
 const fallbackFiles: DriveFile[] = [
   {
-    name: "2026 Player Registration FINAL.pdf",
-    type: "Registration",
-    date: "Aug 04, 2026",
-    url: driveFolderUrl,
+    name: "TCF - Statement of Faith 8-23-2026 FINAL.pdf",
+    type: "PDF",
+    date: "Aug 23, 2026",
+    url: "https://drive.google.com/file/d/14nkyYbz3dOHqIRd4A_0xlwGkw8WRrABa/view",
   },
   {
-    name: "Medical Release FINAL.pdf",
-    type: "Medical",
-    date: "Aug 04, 2026",
-    url: driveFolderUrl,
-  },
-  {
-    name: "Code of Conduct FINAL.pdf",
-    type: "Policies",
-    date: "Jul 28, 2026",
-    url: driveFolderUrl,
-  },
-  {
-    name: "Practice & Game Day Guide FINAL.pdf",
-    type: "Information",
-    date: "Jul 28, 2026",
-    url: driveFolderUrl,
+    name: "Topeka Christian Football - Participant application (8-22-2026) FINAL.docx",
+    type: "Document",
+    date: "Aug 24, 2026",
+    url: "https://drive.google.com/file/d/1dvsDEc34UKI9HV9yeYXNW5B9dIsxUo00/view",
   },
 ];
 
@@ -432,8 +420,8 @@ function ApplicationPage() {
           </h1>
         </div>
         <p className="forms-intro">
-          Complete this application, then submit it for review. You will also
-          need the liability, practice field, and medical waivers from the{" "}
+          Please read and sign. You will also need to fill out the liability
+          waiver, practice field waiver, and medical waiver from the{" "}
           <button className="text-link" onClick={() => navigate("forms")}>
             Forms &amp; Info
           </button>{" "}
@@ -456,22 +444,22 @@ function ApplicationPage() {
         <form className="application-form" onSubmit={submitApplication}>
           <fieldset>
             <legend>Student information</legend>
-            <div className="form-grid">
-              <label>
-                Student name
-                <input name="studentName" required />
-              </label>
+            <label>
+              Name of student
+              <input name="studentName" required />
+            </label>
+            <div className="form-grid form-grid--pair">
               <label>
                 Grade
                 <input name="grade" required />
               </label>
               <label>
-                Date of birth
+                Date of birth (DOB)
                 <input name="dateOfBirth" type="date" required />
               </label>
             </div>
             <label>
-              Current school status
+              Student is currently
               <select name="schoolStatus" required>
                 <option value="">Select one</option>
                 <option>Homeschooled</option>
@@ -484,6 +472,12 @@ function ApplicationPage() {
               If other, please describe
               <input name="schoolStatusOther" />
             </label>
+            <p className="form-note">
+              If the player is currently involved in other sports at their
+              current organization, it is the player's / family's
+              responsibility to verify eligibility with that organization for
+              other sports.
+            </p>
           </fieldset>
           <fieldset>
             <legend>Parent or guardian contacts</legend>
@@ -493,11 +487,11 @@ function ApplicationPage() {
                 <input name="fatherName" />
               </label>
               <label>
-                Father's phone
+                Phone
                 <input name="fatherPhone" type="tel" />
               </label>
               <label>
-                Father's email
+                Email
                 <input name="fatherEmail" type="email" />
               </label>
               <label>
@@ -505,11 +499,11 @@ function ApplicationPage() {
                 <input name="motherName" />
               </label>
               <label>
-                Mother's phone
+                Phone
                 <input name="motherPhone" type="tel" />
               </label>
               <label>
-                Mother's email
+                Email
                 <input name="motherEmail" type="email" />
               </label>
             </div>
@@ -519,56 +513,70 @@ function ApplicationPage() {
             </label>
           </fieldset>
           <fieldset>
-            <legend>Agreement and sponsorship</legend>
+            <legend>Agreements &amp; sponsor</legend>
             <p className="form-instruction">
-              Please read the Statement of Faith before submitting this
-              application.
+              Please read the Statement of Faith before submitting. Each
+              statement below requires a parent initial.
             </p>
-            <div className="initial-grid">
-              <label>
-                Parent initial
-                <input
-                  name="statementOfFaithInitialOne"
-                  maxLength={5}
-                  required
-                />
-              </label>
-              <label>
-                Parent initial
-                <input
-                  name="statementOfFaithInitialTwo"
-                  maxLength={5}
-                  required
-                />
-              </label>
-              <label>
-                Fee agreement initial
-                <input name="feeAgreementInitial" maxLength={5} required />
-              </label>
+            <div className="agreement">
+              <p>We (parents) have read and agree to the Statement of Faith.</p>
+              <div className="initial-grid">
+                <label>
+                  Parent initial
+                  <input
+                    name="statementOfFaithInitialOne"
+                    maxLength={5}
+                    required
+                  />
+                </label>
+                <label>
+                  Parent initial
+                  <input
+                    name="statementOfFaithInitialTwo"
+                    maxLength={5}
+                    required
+                  />
+                </label>
+              </div>
+            </div>
+            <div className="agreement">
+              <p>
+                We agree to pay applicable fees to participate in the specified
+                activity.
+              </p>
+              <div className="initial-grid">
+                <label>
+                  Initial
+                  <input name="feeAgreementInitial" maxLength={5} required />
+                </label>
+              </div>
+            </div>
+            <div className="agreement">
+              <p>We understand volunteer time is required.</p>
+              <div className="initial-grid">
+                <label>
+                  Initial
+                  <input name="volunteerInitial" maxLength={5} required />
+                </label>
+              </div>
             </div>
             <label>
-              Parent signatures
+              Parents' signatures
               <input name="parentSignatures" required />
             </label>
             <label>
               Name of sponsor
               <input name="sponsorName" required />
             </label>
-            <label className="checkbox-label">
-              <input
-                name="eligibilityAcknowledgement"
-                type="checkbox"
-                required
-              />{" "}
-              I understand that it is my family's responsibility to verify
-              eligibility with any other organization where my student
-              participates.
-            </label>
-            <label className="checkbox-label">
-              <input name="policiesAcknowledgement" type="checkbox" required />{" "}
-              We have read and agree to the Statement of Faith and agree to pay
-              applicable participation fees.
-            </label>
+            <p className="form-note">
+              The sponsor must be a current Topeka Christian Football (TCF)
+              member or coach, in good standing, who knows the applicant's
+              family and agrees that the family meets the standards expected by
+              TCF. If there is no sponsor with a strong knowledge of the player
+              and his family, the applicant and family will be interviewed by
+              one or more members of the TCF board, as is the procedure for new
+              members.
+            </p>
           </fieldset>
           <button
             className="button button-red submit-button"
