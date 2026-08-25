@@ -636,7 +636,7 @@ const coachingStaff: { role: string; names: string }[] = [
   { role: "Head Coach", names: "James Allen" },
   {
     role: "Assistant Coaches",
-    names: "Mike Blatchford, Jeremy Duis, Mark Ketchem, Ben Post & Grady Stegall",
+    names: "Ben Post, Grady Stegall, Jeremy Duis, Mark Ketchem & Mike Blatchford",
   },
   { role: "Coordinator", names: "Shauna Allen" },
   { role: "Managers", names: "Natalie Evans, Emma Ketchem & Paige Wellman" },
