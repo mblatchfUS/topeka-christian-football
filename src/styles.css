@@ -48,6 +48,25 @@ nav { display: flex; align-items: center; gap: clamp(18px, 3vw, 46px); }.nav-lin
 .roster-empty h3 { font: 700 27px 'Barlow Condensed'; text-transform: uppercase; margin: 0 0 8px; }
 .roster-empty p { margin: 0 0 22px; font-size: 14px; line-height: 1.6; color: var(--muted); max-width: 460px; }
 
+.final-note a { color: var(--red); font-weight: 700; border-bottom: 1px solid currentColor; }
+
+/* About Us page */
+.about-page { padding: 95px 0 130px; min-height: calc(100vh - 86px); }
+.about-body { display: grid; grid-template-columns: .55fr 1.45fr; gap: 8%; padding-top: 70px; }
+.about-tag { display: inline-block; font: 700 10px 'DM Sans'; text-transform: uppercase; letter-spacing: 2px; color: var(--red); border-left: 3px solid var(--red); padding: 4px 0 4px 14px; }
+.about-copy { max-width: 640px; }
+.about-copy p { font-size: 17px; line-height: 1.75; margin: 0 0 22px; color: var(--ink); }
+.about-copy p:first-child { font-size: 21px; line-height: 1.6; }
+.about-copy p:first-child:first-letter { font: 800 62px 'Barlow Condensed'; color: var(--red); float: left; line-height: .8; margin: 6px 12px 0 0; }
+.about-copy .text-link { margin-top: 10px; }
+
+@media (max-width: 700px) {
+	.about-page { padding-top: 65px; }
+	.about-body { display: block; padding-top: 45px; }
+	.about-tag { margin-bottom: 30px; }
+	.about-copy p:first-child { font-size: 18px; }
+}
+
 /* Value CTA (Statement of Faith, etc.) */
 .value-link { margin-top: 18px; border: 0; background: transparent; padding: 0 0 5px; color: #fff; font-weight: 700; font-size: 12px; border-bottom: 1px solid rgba(255,255,255,.6); }
 .value-link span { margin-left: 12px; font-size: 15px; }

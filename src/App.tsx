@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from "react";
 
-type Page = "home" | "forms" | "application" | "season";
+type Page = "home" | "forms" | "application" | "season" | "about";
 type DriveFile = { name: string; type: string; date: string; url: string };
 
 const driveFolderUrl =
@@ -38,6 +38,7 @@ function resolvePage(): Page {
   if (hash === "#/application" || pathname.startsWith("/application"))
     return "application";
   if (hash === "#/season" || pathname.startsWith("/season")) return "season";
+  if (hash === "#/about" || pathname.startsWith("/about")) return "about";
   if (hash === "#/forms" || pathname.startsWith("/forms")) return "forms";
   return "home";
 }
@@ -90,6 +91,12 @@ function App() {
           >
             Application
           </button>
+          <button
+            className={page === "about" ? "nav-link active" : "nav-link"}
+            onClick={() => navigate("about")}
+          >
+            About
+          </button>
           <a
             className="nav-cta"
             href="mailto:football@topekachristianfootball.org"
@@ -103,6 +110,7 @@ function App() {
       {page === "season" && <SeasonPage />}
       {page === "forms" && <FormsPage />}
       {page === "application" && <ApplicationPage />}
+      {page === "about" && <AboutPage />}
 
       <footer className="site-footer">
         <div className="footer-brand">
@@ -120,6 +128,61 @@ function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+function AboutPage() {
+  return (
+    <main className="about-page page-width">
+      <section className="forms-hero">
+        <div>
+          <p className="eyebrow">Our story</p>
+          <h1>
+            About
+            <br />
+            <em>us.</em>
+          </h1>
+        </div>
+        <p className="forms-intro">
+          From a homeschool football program to a Christ-centered club open to
+          every family who shares our faith and culture.
+        </p>
+      </section>
+
+      <section className="about-body">
+        <div className="about-timeline">
+          <span className="about-tag">Est. August 2026 · Topeka, KS</span>
+        </div>
+        <div className="about-copy">
+          <p>
+            Founded by Kip &amp; Tracy Van Camp in 2020 within the Cornerstone
+            Family School organization, the football program served to provide a
+            new sport for the Cornerstone homeschool family.
+          </p>
+          <p>
+            After 6 years and a dwindling roster made up of entirely
+            homeschooled athletes that are taught 51% by a parent, the coaching
+            staff, athletes and families discussed branching off to a club team
+            with the CFS Board of Directors.
+          </p>
+          <p>
+            It was decided on August 22, 2026 this was in the best interest of
+            both programs and would allow Topeka Christian Football to roster
+            players that meet our statement of faith and culture centered on
+            Christ, but may not necessarily meet the 51% homeschool criteria.
+          </p>
+          <p>
+            In August, 2026 Topeka Christian Football was established.
+          </p>
+          <button
+            className="text-link"
+            onClick={() => navigate("application")}
+          >
+            Join the roster <span>→</span>
+          </button>
+        </div>
+      </section>
+    </main>
   );
 }
 
@@ -743,6 +806,29 @@ function FormsPage() {
           ))}
         </div>
       </section>
+      <section className="files-section">
+        <div className="files-heading">
+          <h2>Team resources</h2>
+          <span>Players &amp; coaches</span>
+        </div>
+        <div className="file-list">
+          <a
+            className="file-row"
+            href="https://qwikcut.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className="file-icon">FILM</span>
+            <span className="file-name">
+              <strong>Game film on QwikCut</strong>
+              <small>Practice, scouting &amp; game review</small>
+            </span>
+            <span className="download">
+              Open <b>↗</b>
+            </span>
+          </a>
+        </div>
+      </section>
       <section className="final-note">
         <span className="note-mark">✓</span>
         <div>
@@ -751,6 +837,25 @@ function FormsPage() {
             We keep this page clean: when a document is ready for families, it
             is marked <strong>FINAL</strong> in the shared Drive and appears
             here automatically.
+          </p>
+        </div>
+      </section>
+      <section className="final-note">
+        <span className="note-mark">★</span>
+        <div>
+          <h3>Cornerstone Family Schools</h3>
+          <p>
+            We’re proud to partner with Cornerstone Family Schools. If your
+            athlete is a 51% homeschooled student interested in fine arts,
+            events, testing, or other athletics, visit the{" "}
+            <a
+              href="https://cfsks.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Cornerstone Family School site
+            </a>{" "}
+            for more information.
           </p>
         </div>
       </section>
