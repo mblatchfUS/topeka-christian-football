@@ -539,7 +539,7 @@ type Game = {
   place: "Home" | "Away";
   detail: string;
   result?: string;
-  status?: "Confirmed" | "Pending" | "Unlikely";
+  status?: "Confirmed" | "Pending" | "Unlikely" | "Canceled";
 };
 
 type Player = {
@@ -563,7 +563,7 @@ const schedule: Game[] = [
     opponent: "Northland Christian",
     place: "Away",
     detail: "Varsity · 7:00 PM",
-    status: "Unlikely",
+    status: "Canceled",
   },
   {
     day: "18",
@@ -749,7 +749,12 @@ function SeasonPage() {
                   {game.place}
                 </span>
                 <strong>
-                  {game.place === "Home" ? "vs" : "at"} {game.opponent}
+                  {game.place === "Home" ? "vs" : "at"}{" "}
+                  {game.status === "Canceled" ? (
+                    <s>{game.opponent}</s>
+                  ) : (
+                    game.opponent
+                  )}
                   {game.status && (
                     <span
                       className={`status-tag ${game.status.toLowerCase()}`}
