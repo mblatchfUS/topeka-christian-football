@@ -602,7 +602,11 @@ const schedule: Game[] = [
 
 // Roster is confirmed closer to kickoff. Add players here to populate the
 // table below; an empty list renders the "coming soon" state.
-const roster: Player[] = [];
+const roster: Player[] = [
+  { number: "68", name: "Lee Napier", position: "TBA", grade: "TBA" },
+  { number: "72", name: "Logan Reihm", position: "TBA", grade: "TBA" },
+  { number: "77", name: "Paddy Mason", position: "TBA", grade: "TBA" },
+];
 
 function SeasonPage() {
   const wins = schedule.filter((game) => game.result?.startsWith("W")).length;
