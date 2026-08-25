@@ -156,7 +156,7 @@ function AboutPage() {
         <div className="about-copy">
           <p>
             Founded by Kipp &amp; Tracy Van Camp in 2020 within the Cornerstone
-            Family School organization, the football program served to provide a
+            Family Schools organization, the football program served to provide a
             new sport for the Cornerstone homeschool family.
           </p>
           <p>
@@ -169,7 +169,7 @@ function AboutPage() {
             Through mutual agreement, it was decided on August 22, 2026 this was in the best interest of
             both programs and would allow Topeka Christian Football to roster
             players that meet our statement of faith and culture centered on
-            Christ, but may not necessarily meet the 51% homeschool criteria requierd of CFS.
+            Christ, but may not necessarily meet the 51%+ homeschool criteria requierd of CFS.
           </p>
           <p>
             In August, 2026 Topeka Christian Football was established.
