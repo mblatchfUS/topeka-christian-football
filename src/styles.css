@@ -52,6 +52,7 @@ nav { display: flex; align-items: center; gap: clamp(18px, 3vw, 46px); }.nav-lin
 .status-tag.confirmed { background: #1f7a3d; }
 .status-tag.pending { background: #b8860b; }
 .status-tag.unlikely { background: #8a8079; }
+.status-tag.senior { background: #b8860b; }
 .schedule-result { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); font-weight: 700; white-space: nowrap; }
 .roster-table { width: 100%; border-collapse: collapse; border-top: 2px solid var(--ink); }
 .roster-table th { text-align: left; font: 700 10px 'DM Sans'; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); padding: 14px 12px; border-bottom: 1px solid var(--line); }

@@ -790,7 +790,12 @@ function SeasonPage() {
                 {roster.map((player) => (
                   <tr key={player.number + player.name}>
                     <td className="roster-num">{player.number}</td>
-                    <td>{player.name}</td>
+                    <td>
+                      {player.name}
+                      {player.grade === "12" && (
+                        <span className="status-tag senior">Senior</span>
+                      )}
+                    </td>
                     <td>{player.grade}</td>
                   </tr>
                 ))}
