@@ -539,7 +539,7 @@ type Game = {
   place: "Home" | "Away";
   detail: string;
   result?: string;
-  confirmed?: boolean;
+  status?: "Confirmed" | "Pending" | "Unlikely";
 };
 
 type Player = {
@@ -555,7 +555,7 @@ const schedule: Game[] = [
     opponent: "KC East",
     place: "Away",
     detail: "Varsity · 7:00 PM",
-    confirmed: true,
+    status: "Confirmed",
   },
   {
     day: "11",
@@ -563,6 +563,7 @@ const schedule: Game[] = [
     opponent: "Northland Christian",
     place: "Away",
     detail: "Varsity · 7:00 PM",
+    status: "Unlikely",
   },
   {
     day: "18",
@@ -576,7 +577,8 @@ const schedule: Game[] = [
     month: "Sep",
     opponent: "Life Prep",
     place: "Home",
-    detail: "Senior Night · Homecoming · Varsity 7:00 PM",
+    detail: "Senior Night · Varsity 7:00 PM",
+    status: "Confirmed",
   },
   {
     day: "3",
@@ -584,6 +586,7 @@ const schedule: Game[] = [
     opponent: "Joplin Cornerstone",
     place: "Away",
     detail: "Time TBA",
+    status: "Pending",
   },
   {
     day: "9",
@@ -591,14 +594,15 @@ const schedule: Game[] = [
     opponent: "Wichita Defenders",
     place: "Away",
     detail: "Varsity · 7:00 PM",
-    confirmed: true,
+    status: "Confirmed",
   },
   {
     day: "23",
     month: "Oct",
-    opponent: "Manhattan",
+    opponent: "Manhattan Eagles",
     place: "Away",
     detail: "Varsity · 7:00 PM",
+    status: "Confirmed",
   },
 ];
 
@@ -745,8 +749,12 @@ function SeasonPage() {
                 </span>
                 <strong>
                   {game.place === "Home" ? "vs" : "at"} {game.opponent}
-                  {game.confirmed && (
-                    <span className="confirmed-tag">Confirmed</span>
+                  {game.status && (
+                    <span
+                      className={`status-tag ${game.status.toLowerCase()}`}
+                    >
+                      {game.status}
+                    </span>
                   )}
                 </strong>
                 <small>{game.detail}</small>
