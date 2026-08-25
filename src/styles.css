@@ -48,6 +48,7 @@ nav { display: flex; align-items: center; gap: clamp(18px, 3vw, 46px); }.nav-lin
 .place-tag { justify-self: start; font: 700 9px 'DM Sans'; text-transform: uppercase; letter-spacing: 1.5px; padding: 4px 8px; }
 .place-tag.home { background: var(--red); color: #fff; }
 .place-tag.away { border: 1px solid #c9c2bb; color: var(--muted); }
+.confirmed-tag { display: inline-block; margin-left: 8px; vertical-align: middle; font: 700 9px 'DM Sans'; text-transform: uppercase; letter-spacing: 1.5px; padding: 3px 8px; background: #1f7a3d; color: #fff; border-radius: 3px; }
 .schedule-result { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); font-weight: 700; white-space: nowrap; }
 .roster-table { width: 100%; border-collapse: collapse; border-top: 2px solid var(--ink); }
 .roster-table th { text-align: left; font: 700 10px 'DM Sans'; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); padding: 14px 12px; border-bottom: 1px solid var(--line); }

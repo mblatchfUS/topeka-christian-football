@@ -539,6 +539,7 @@ type Game = {
   place: "Home" | "Away";
   detail: string;
   result?: string;
+  confirmed?: boolean;
 };
 
 type Player = {
@@ -554,6 +555,7 @@ const schedule: Game[] = [
     opponent: "KC East",
     place: "Away",
     detail: "Varsity · 7:00 PM",
+    confirmed: true,
   },
   {
     day: "11",
@@ -589,6 +591,7 @@ const schedule: Game[] = [
     opponent: "Wichita Defenders",
     place: "Away",
     detail: "Varsity · 7:00 PM",
+    confirmed: true,
   },
   {
     day: "23",
@@ -679,18 +682,17 @@ function SeasonPage() {
           <div>
             <strong>Can’t make it? Watch live.</strong>
             <small>
-              Home games stream on our Facebook page — link coming soon.
+              Home games stream on our Facebook group.
             </small>
           </div>
         </div>
-        {/* TODO: replace with the association's Facebook page URL */}
         <a
           className="text-link"
-          href="https://www.facebook.com/"
+          href="https://www.facebook.com/groups/1439602686896703"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Facebook Live (coming soon) <span>↗</span>
+          Facebook Live <span>↗</span>
         </a>
       </section>
 
@@ -743,6 +745,9 @@ function SeasonPage() {
                 </span>
                 <strong>
                   {game.place === "Home" ? "vs" : "at"} {game.opponent}
+                  {game.confirmed && (
+                    <span className="confirmed-tag">Confirmed</span>
+                  )}
                 </strong>
                 <small>{game.detail}</small>
               </div>
