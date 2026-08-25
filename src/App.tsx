@@ -540,6 +540,7 @@ type Game = {
   detail: string;
   result?: string;
   status?: "Confirmed" | "Pending" | "Unlikely" | "Canceled";
+  open?: boolean;
 };
 
 type Player = {
@@ -556,6 +557,14 @@ const schedule: Game[] = [
     place: "Away",
     detail: "Varsity · 7:00 PM",
     status: "Confirmed",
+  },
+  {
+    day: "4",
+    month: "Sep",
+    opponent: "",
+    place: "Home",
+    detail: "Friday night available",
+    open: true,
   },
   {
     day: "11",
@@ -582,6 +591,14 @@ const schedule: Game[] = [
     status: "Confirmed",
   },
   {
+    day: "2",
+    month: "Oct",
+    opponent: "",
+    place: "Home",
+    detail: "Friday night available",
+    open: true,
+  },
+  {
     day: "3",
     month: "Oct",
     opponent: "Joplin Cornerstone",
@@ -596,6 +613,14 @@ const schedule: Game[] = [
     place: "Away",
     detail: "Varsity · 7:00 PM",
     status: "Confirmed",
+  },
+  {
+    day: "16",
+    month: "Oct",
+    opponent: "",
+    place: "Home",
+    detail: "Friday night available",
+    open: true,
   },
   {
     day: "23",
@@ -645,7 +670,11 @@ const coachingStaff: { role: string; names: string }[] = [
 function SeasonPage() {
   const wins = schedule.filter((game) => game.result?.startsWith("W")).length;
   const losses = schedule.filter((game) => game.result?.startsWith("L")).length;
-  const homeGames = schedule.filter((game) => game.place === "Home").length;
+  const games = schedule.filter(
+    (game) => !game.open && game.status !== "Canceled",
+  );
+  const gameCount = games.length;
+  const homeGames = games.filter((game) => game.place === "Home").length;
 
   return (
     <main className="season-page page-width">
@@ -709,7 +738,7 @@ function SeasonPage() {
           <small>Record</small>
         </div>
         <div className="season-stat">
-          <strong>{schedule.length}</strong>
+          <strong>{gameCount}</strong>
           <small>Games</small>
         </div>
         <div className="season-stat">
@@ -727,7 +756,24 @@ function SeasonPage() {
           <span className="heading-note">Home field · Bennett Field</span>
         </div>
         <div className="schedule">
-          {schedule.map((game) => (
+          {schedule.map((game) =>
+            game.open ? (
+              <div
+                className="schedule-row is-open"
+                key={`${game.month}-${game.day}`}
+              >
+                <div className="schedule-date">
+                  <strong>{game.day}</strong>
+                  <small>{game.month}</small>
+                </div>
+                <div className="schedule-matchup">
+                  <span className="place-tag open">Open</span>
+                  <strong>Open Game Slot</strong>
+                  <small>{game.detail}</small>
+                </div>
+                <div className="schedule-result">Seeking opponent</div>
+              </div>
+            ) : (
             <div
               className={
                 game.place === "Home"
@@ -769,7 +815,8 @@ function SeasonPage() {
                 {game.result ?? "Upcoming"}
               </div>
             </div>
-          ))}
+            ),
+          )}
         </div>
       </section>
 

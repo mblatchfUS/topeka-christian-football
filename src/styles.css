@@ -39,6 +39,8 @@ nav { display: flex; align-items: center; gap: clamp(18px, 3vw, 46px); }.nav-lin
 .schedule { border-top: 2px solid var(--ink); }
 .schedule-row { display: grid; grid-template-columns: 92px 1fr auto; align-items: center; gap: 22px; padding: 20px 12px; border-bottom: 1px solid var(--line); }
 .schedule-row.is-home { background: #efe9e3; }
+.schedule-row.is-open { background: repeating-linear-gradient(45deg, #f4f0ea, #f4f0ea 10px, #ece6df 10px, #ece6df 20px); color: var(--muted); }
+.schedule-row.is-open strong { color: var(--muted); font-style: italic; }
 .schedule-date { text-align: center; }
 .schedule-date strong { display: block; font: 800 34px 'Barlow Condensed'; line-height: .9; }
 .schedule-date small { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); }
@@ -48,6 +50,7 @@ nav { display: flex; align-items: center; gap: clamp(18px, 3vw, 46px); }.nav-lin
 .place-tag { justify-self: start; font: 700 9px 'DM Sans'; text-transform: uppercase; letter-spacing: 1.5px; padding: 4px 8px; }
 .place-tag.home { background: var(--red); color: #fff; }
 .place-tag.away { border: 1px solid #c9c2bb; color: var(--muted); }
+.place-tag.open { border: 1px dashed #b8860b; color: #b8860b; }
 .status-tag { display: inline-block; margin-left: 8px; vertical-align: middle; font: 700 9px 'DM Sans'; text-transform: uppercase; letter-spacing: 1.5px; padding: 3px 8px; color: #fff; border-radius: 3px; }
 .status-tag.confirmed { background: #1f7a3d; }
 .status-tag.pending { background: #b8860b; }
