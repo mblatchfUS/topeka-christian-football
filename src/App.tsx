@@ -161,15 +161,14 @@ function AboutPage() {
           </p>
           <p>
             After 6 years and a dwindling roster made up of entirely
-            homeschooled athletes that are taught 51% by a parent, the coaching
-            staff, athletes and families discussed branching off to a club team
-            with the CFS Board of Directors.
+            homeschooled athletes that are taught 51%+ by a parent, the coaching
+            staff, athletes, football families and the CFS Board of Directors discussed branching the program to a club team.
           </p>
           <p>
-            Through mutual agreement, it was decided on August 22, 2026 this was in the best interest of
+            Through mutual agreement, it was decided on August 22, 2026 with a unanimous decision by the board, this was in the best interest of
             both programs and would allow Topeka Christian Football to roster
             players that meet our statement of faith and culture centered on
-            Christ, but may not necessarily meet the 51%+ homeschool criteria requierd of CFS.
+            Christ, but may not necessarily meet the 51%+ homeschool criteria required of CFS.
           </p>
           <p>
             In August, 2026 Topeka Christian Football was established.
