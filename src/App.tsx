@@ -155,7 +155,7 @@ function AboutPage() {
         </div>
         <div className="about-copy">
           <p>
-            Founded by Kip &amp; Tracy Van Camp in 2020 within the Cornerstone
+            Founded by Kipp &amp; Tracy Van Camp in 2020 within the Cornerstone
             Family School organization, the football program served to provide a
             new sport for the Cornerstone homeschool family.
           </p>
