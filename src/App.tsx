@@ -166,10 +166,10 @@ function AboutPage() {
             with the CFS Board of Directors.
           </p>
           <p>
-            It was decided on August 22, 2026 this was in the best interest of
+            Through mutual agreement, it was decided on August 22, 2026 this was in the best interest of
             both programs and would allow Topeka Christian Football to roster
             players that meet our statement of faith and culture centered on
-            Christ, but may not necessarily meet the 51% homeschool criteria.
+            Christ, but may not necessarily meet the 51% homeschool criteria requierd of CFS.
           </p>
           <p>
             In August, 2026 Topeka Christian Football was established.
@@ -622,10 +622,27 @@ function SeasonPage() {
           </h1>
         </div>
         <p className="forms-intro">
-          Seven games, one brotherhood. Home field is Bennett Field, Lawrence KS
-          — 1470 N 1000 Rd, 66046. Come loud, come faithful.
+          Seven games, one brotherhood. Come loud, come faithful.
         </p>
       </div>
+
+      <section className="home-field">
+        <div className="home-field-copy">
+          <span className="home-field-label">Home field</span>
+          <strong>Bennett Field</strong>
+          <span className="home-field-addr">
+            1470 N 1000 Rd, Lawrence, KS 66046
+          </span>
+        </div>
+        <a
+          className="button button-red"
+          href="https://www.google.com/maps/dir/?api=1&destination=1470+N+1000+Rd,+Lawrence,+KS+66046"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Get directions <span>↗</span>
+        </a>
+      </section>
 
       <div className="season-stats">
         <div className="season-stat">
