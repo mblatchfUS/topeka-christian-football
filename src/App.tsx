@@ -644,6 +644,27 @@ function SeasonPage() {
         </a>
       </section>
 
+      <section className="live-stream">
+        <div className="live-stream-copy">
+          <span className="live-badge">Live</span>
+          <div>
+            <strong>Can’t make it? Watch live.</strong>
+            <small>
+              Home games stream on our Facebook page — link coming soon.
+            </small>
+          </div>
+        </div>
+        {/* TODO: replace with the association's Facebook page URL */}
+        <a
+          className="text-link"
+          href="https://www.facebook.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Facebook Live (coming soon) <span>↗</span>
+        </a>
+      </section>
+
       <div className="season-stats">
         <div className="season-stat">
           <strong>

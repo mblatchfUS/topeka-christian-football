@@ -25,6 +25,11 @@ nav { display: flex; align-items: center; gap: clamp(18px, 3vw, 46px); }.nav-lin
 .home-field-label { font: 700 10px 'DM Sans'; text-transform: uppercase; letter-spacing: 2.5px; color: #ed7378; }
 .home-field-copy strong { font: 800 clamp(30px, 4vw, 44px)/1 'Barlow Condensed'; text-transform: uppercase; letter-spacing: -.5px; }
 .home-field-addr { font-size: 14px; color: #cfcac6; margin-top: 3px; }
+.live-stream { margin-top: 14px; background: #efe9e3; padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.live-stream-copy { display: flex; align-items: center; gap: 16px; }
+.live-badge { font: 700 10px 'DM Sans'; text-transform: uppercase; letter-spacing: 2px; color: #fff; background: var(--red); padding: 5px 10px; position: relative; }
+.live-stream-copy strong { display: block; font: 700 20px 'Barlow Condensed'; text-transform: uppercase; letter-spacing: .3px; }
+.live-stream-copy small { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
 .season-stats { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); margin: 34px 0 0; }
 .season-stat { padding: 26px 0; border-right: 1px solid var(--line); text-align: center; }
 .season-stat:last-child { border-right: 0; }
@@ -110,6 +115,8 @@ nav { display: flex; align-items: center; gap: clamp(18px, 3vw, 46px); }.nav-lin
 	.season-page { padding-top: 65px; }
 	.home-field { padding: 22px; }
 	.home-field .button { width: 100%; text-align: center; }
+	.live-stream { padding: 18px 22px; }
+	.live-stream .text-link { margin-top: 4px; }
 	.season-stat strong { font-size: 34px; }
 	.schedule-section, .roster-section { padding-top: 55px; }
 	.schedule-row { grid-template-columns: 60px 1fr; row-gap: 10px; padding: 18px 3px; }
