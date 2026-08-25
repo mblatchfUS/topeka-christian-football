@@ -571,6 +571,7 @@ const schedule: Game[] = [
     opponent: "Sunrise",
     place: "Home",
     detail: "Homecoming · Alumni game 5:00 PM · Varsity 7:00 PM",
+    status: "Pending",
   },
   {
     day: "25",
