@@ -53,6 +53,12 @@ nav { display: flex; align-items: center; gap: clamp(18px, 3vw, 46px); }.nav-lin
 .roster-table th { text-align: left; font: 700 10px 'DM Sans'; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); padding: 14px 12px; border-bottom: 1px solid var(--line); }
 .roster-table td { padding: 16px 12px; border-bottom: 1px solid var(--line); font-size: 14px; }
 .roster-table tbody tr:hover, .roster-table tbody tr:hover { background: #efe9e3; }
+.roster-num { font: 800 16px 'Barlow Condensed'; color: var(--red); }
+.coaching-staff { margin-top: 46px; padding: 32px; background: #efe9e3; }
+.coaching-staff h3 { font: 700 24px 'Barlow Condensed'; text-transform: uppercase; margin: 0 0 20px; }
+.coaching-staff dl { margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 40px; }
+.coaching-staff dt { font: 700 10px 'DM Sans'; text-transform: uppercase; letter-spacing: 2px; color: var(--red); margin-bottom: 5px; }
+.coaching-staff dd { margin: 0; font-size: 15px; line-height: 1.5; }
 .roster-empty { display: flex; gap: 18px; padding: 34px; background: #e8e2dc; }
 .roster-empty .note-mark { flex: 0 0 auto; }
 .roster-empty h3 { font: 700 27px 'Barlow Condensed'; text-transform: uppercase; margin: 0 0 8px; }
@@ -122,4 +128,6 @@ nav { display: flex; align-items: center; gap: clamp(18px, 3vw, 46px); }.nav-lin
 	.schedule-row { grid-template-columns: 60px 1fr; row-gap: 10px; padding: 18px 3px; }
 	.schedule-result { grid-column: 2; justify-self: start; }
 	.roster-empty { flex-direction: column; padding: 22px; }
+	.coaching-staff { padding: 22px; }
+	.coaching-staff dl { grid-template-columns: 1fr; gap: 18px; }
 }

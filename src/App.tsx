@@ -544,7 +544,6 @@ type Game = {
 type Player = {
   number: string;
   name: string;
-  position: string;
   grade: string;
 };
 
@@ -603,9 +602,36 @@ const schedule: Game[] = [
 // Roster is confirmed closer to kickoff. Add players here to populate the
 // table below; an empty list renders the "coming soon" state.
 const roster: Player[] = [
-  { number: "68", name: "Lee Napier", position: "TBA", grade: "TBA" },
-  { number: "72", name: "Logan Reihm", position: "TBA", grade: "TBA" },
-  { number: "77", name: "Paddy Mason", position: "TBA", grade: "TBA" },
+  { number: "1", name: "Max Blatchford", grade: "12" },
+  { number: "5", name: "Abrahm Tarwater", grade: "12" },
+  { number: "7", name: "Desmond Grindal", grade: "12" },
+  { number: "9", name: "Levi Hoskinson", grade: "12" },
+  { number: "15", name: "Jaxon Duis", grade: "11" },
+  { number: "16", name: "Obadiah Hurr", grade: "10" },
+  { number: "17", name: "Ethan Lauver", grade: "11" },
+  { number: "18", name: "Boone Clark", grade: "9" },
+  { number: "20", name: "Easton Cook", grade: "12" },
+  { number: "32", name: "Gideon Hawkinson", grade: "11" },
+  { number: "42", name: "Nehemiah Hurr", grade: "11" },
+  { number: "55", name: "Seamus Mason", grade: "11" },
+  { number: "56", name: "Ethan Dinkel", grade: "—" },
+  { number: "68", name: "Lee Napier", grade: "12" },
+  { number: "72", name: "Logan Reihm", grade: "12" },
+  { number: "75", name: "Levi Ketchem", grade: "10" },
+  { number: "77", name: "Paddy Mason", grade: "—" },
+  { number: "81", name: "Thomas Walker", grade: "11" },
+  { number: "95", name: "Brayden Elliott", grade: "11" },
+  { number: "98", name: "Declan Mason", grade: "10" },
+];
+
+const coachingStaff: { role: string; names: string }[] = [
+  { role: "Head Coach", names: "James Allen" },
+  {
+    role: "Assistant Coaches",
+    names: "Mike Blatchford, Jeremy Duis, Mark Ketchem, Ben Post & Grady Stegall",
+  },
+  { role: "Coordinator", names: "Shauna Allen" },
+  { role: "Managers", names: "Natalie Evans, Emma Ketchem & Paige Wellman" },
 ];
 
 function SeasonPage() {
@@ -737,26 +763,37 @@ function SeasonPage() {
           <span className="heading-note">Announced before kickoff</span>
         </div>
         {roster.length > 0 ? (
-          <table className="roster-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Player</th>
-                <th>Position</th>
-                <th>Grade</th>
-              </tr>
-            </thead>
-            <tbody>
-              {roster.map((player) => (
-                <tr key={player.number + player.name}>
-                  <td>{player.number}</td>
-                  <td>{player.name}</td>
-                  <td>{player.position}</td>
-                  <td>{player.grade}</td>
+          <>
+            <table className="roster-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Player</th>
+                  <th>Grade</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {roster.map((player) => (
+                  <tr key={player.number + player.name}>
+                    <td className="roster-num">{player.number}</td>
+                    <td>{player.name}</td>
+                    <td>{player.grade}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="coaching-staff">
+              <h3>Coaching staff</h3>
+              <dl>
+                {coachingStaff.map((s) => (
+                  <div key={s.role}>
+                    <dt>{s.role}</dt>
+                    <dd>{s.names}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </>
         ) : (
           <div className="roster-empty">
             <span className="note-mark">★</span>
