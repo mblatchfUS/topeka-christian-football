@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
+import SaintsLogo from "./SaintsLogo";
 
 type Page = "home" | "forms" | "application" | "season" | "about";
 type DriveFile = { name: string; type: string; date: string; url: string };
@@ -60,9 +61,9 @@ function App() {
           onClick={() => navigate("home")}
           aria-label="Go to home page"
         >
-          <span className="brand-mark">TC</span>
+          <SaintsLogo className="brand-logo" size={44} />
           <span className="brand-copy">
-            <strong>Topeka Christian</strong>
+            <strong>Topeka Christian Saints</strong>
             <small>Football Association</small>
           </span>
         </button>
@@ -114,9 +115,9 @@ function App() {
 
       <footer className="site-footer">
         <div className="footer-brand">
-          <span className="brand-mark">TC</span>
+          <SaintsLogo className="brand-logo" size={40} />
           <span>
-            <strong>Topeka Christian Football Association</strong>
+            <strong>Topeka Christian Saints</strong>
             <small>First season · 2026</small>
           </span>
         </div>
@@ -636,6 +637,7 @@ const schedule: Game[] = [
 // table below; an empty list renders the "coming soon" state.
 const roster: Player[] = [
   { number: "1", name: "Max Blatchford", grade: "12" },
+  { number: "4", name: "Greyson Jones", grade: "12" },
   { number: "5", name: "Abrahm Tarwater", grade: "12" },
   { number: "7", name: "Desmond Grindal", grade: "12" },
   { number: "9", name: "Levi Hoskinson", grade: "12" },

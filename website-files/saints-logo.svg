@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 128" width="480" height="512" role="img" aria-label="Topeka Christian Saints">
+  <title>Topeka Christian Saints</title>
+  <defs>
+    <linearGradient id="saints-field" x1="60" y1="4" x2="60" y2="126" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ba1821"/>
+      <stop offset="1" stop-color="#8f1018"/>
+    </linearGradient>
+  </defs>
+  <path d="M60 4 L108 18 C110 19 111 20 111 24 V66 C111 96 90 118 60 126 C30 118 9 96 9 66 V24 C9 20 10 19 12 18 Z" fill="url(#saints-field)" stroke="#191919" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M60 15 L100 26 V65 C100 90 82 108 60 115 C38 108 20 90 20 65 V26 Z" fill="none" stroke="#f7f5f2" stroke-width="2" stroke-opacity="0.65" stroke-linejoin="round"/>
+  <ellipse cx="60" cy="39" rx="27" ry="8.5" fill="none" stroke="#f0c14b" stroke-width="5"/>
+  <ellipse cx="60" cy="39" rx="27" ry="8.5" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="1.5"/>
+  <text x="60" y="99" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-weight="900" font-size="70" fill="#f7f5f2" stroke="#191919" stroke-width="1.5" paint-order="stroke">S</text>
+  <text x="60" y="118" text-anchor="middle" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-weight="700" font-size="9" letter-spacing="1.5" fill="#f0c14b">EST. 2026</text>
+</svg>
