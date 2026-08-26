@@ -4,9 +4,6 @@ import SaintsLogo from "./SaintsLogo";
 type Page = "home" | "forms" | "application" | "season" | "about";
 type DriveFile = { name: string; type: string; date: string; url: string };
 
-const driveFolderUrl =
-  import.meta.env.VITE_GOOGLE_DRIVE_FOLDER_URL ||
-  "https://drive.google.com/drive/folders/1LUWgtON4iBmO7InVzofRbVWTz6V39YW7";
 const driveFeedUrl = import.meta.env.VITE_GOOGLE_DRIVE_FEED_URL || "";
 const applicationEndpoint =
   import.meta.env.VITE_APPLICATION_FORM_ENDPOINT ||
@@ -892,7 +889,6 @@ function SeasonPage() {
 
 function FormsPage() {
   const [files, setFiles] = useState<DriveFile[]>(fallbackFiles);
-  const [isLive, setIsLive] = useState(false);
 
   useEffect(() => {
     if (!driveFeedUrl) return;
@@ -902,9 +898,8 @@ function FormsPage() {
         setFiles(
           data.filter((file) => file.name.toUpperCase().includes("FINAL")),
         );
-        setIsLive(true);
       })
-      .catch(() => setIsLive(false));
+      .catch(() => {});
   }, []);
 
   return (
@@ -921,13 +916,6 @@ function FormsPage() {
           The latest forms, guides, and policies for the 2026 season, all in one
           place. Download what you need, then get ready to play.
         </p>
-      </div>
-      <div className="drive-status">
-        <span className={isLive ? "status-dot live" : "status-dot"} />
-        {isLive ? "Live from the team Drive" : "Team Drive folder"}
-        <a href={driveFolderUrl} target="_blank" rel="noreferrer">
-          Open shared folder ↗
-        </a>
       </div>
       <section className="files-section">
         <div className="files-heading">
@@ -978,17 +966,6 @@ function FormsPage() {
               Open <b>↗</b>
             </span>
           </a>
-        </div>
-      </section>
-      <section className="final-note">
-        <span className="note-mark">✓</span>
-        <div>
-          <h3>Only the final word.</h3>
-          <p>
-            We keep this page clean: when a document is ready for families, it
-            is marked <strong>FINAL</strong> in the shared Drive and appears
-            here automatically.
-          </p>
         </div>
       </section>
       <section className="final-note">
