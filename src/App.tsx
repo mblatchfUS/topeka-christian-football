@@ -333,7 +333,7 @@ function HomePage() {
             <h3>Cornerstone Family Schools</h3>
             <p>
               We’re proud to partner with Cornerstone Family Schools. If your
-              athlete is a 51% homeschooled student interested in fine arts,
+              athlete is a 51%+ homeschooled student interested in fine arts,
               events, testing, or other athletics, visit the{" "}
               <a
                 href="https://cfsks.org/"
