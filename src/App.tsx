@@ -1,5 +1,4 @@
 import { useEffect, useState, type FormEvent } from "react";
-import SaintsLogo from "./SaintsLogo";
 
 type Page = "home" | "forms" | "application" | "season" | "about";
 type DriveFile = { name: string; type: string; date: string; url: string };
@@ -58,7 +57,7 @@ function App() {
           onClick={() => navigate("home")}
           aria-label="Go to home page"
         >
-          <SaintsLogo className="brand-logo" size={44} />
+          <span className="brand-mark">TCF</span>
           <span className="brand-copy">
             <strong>Topeka Christian Saints</strong>
             <small>Football Association</small>
@@ -112,7 +111,7 @@ function App() {
 
       <footer className="site-footer">
         <div className="footer-brand">
-          <SaintsLogo className="brand-logo" size={40} />
+          <span className="brand-mark">TCF</span>
           <span>
             <strong>Topeka Christian Saints</strong>
             <small>First season · 2026</small>
@@ -328,6 +327,25 @@ function HomePage() {
             </span>
           </div>
         </div>
+        <section className="final-note final-note-centered">
+          <span className="note-mark">★</span>
+          <div>
+            <h3>Cornerstone Family Schools</h3>
+            <p>
+              We’re proud to partner with Cornerstone Family Schools. If your
+              athlete is a 51% homeschooled student interested in fine arts,
+              events, testing, or other athletics, visit the{" "}
+              <a
+                href="https://cfsks.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Cornerstone Family School site
+              </a>{" "}
+              for more information.
+            </p>
+          </div>
+        </section>
       </section>
     </main>
     <StatementOfFaithModal open={faithOpen} onClose={() => setFaithOpen(false)} />
@@ -966,25 +984,6 @@ function FormsPage() {
               Open <b>↗</b>
             </span>
           </a>
-        </div>
-      </section>
-      <section className="final-note">
-        <span className="note-mark">★</span>
-        <div>
-          <h3>Cornerstone Family Schools</h3>
-          <p>
-            We’re proud to partner with Cornerstone Family Schools. If your
-            athlete is a 51% homeschooled student interested in fine arts,
-            events, testing, or other athletics, visit the{" "}
-            <a
-              href="https://cfsks.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Cornerstone Family School site
-            </a>{" "}
-            for more information.
-          </p>
         </div>
       </section>
       <section className="final-note">
