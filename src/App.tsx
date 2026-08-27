@@ -334,15 +334,15 @@ function HomePage() {
             <p>
               We’re proud to partner with Cornerstone Family Schools. If your
               athlete is a 51%+ homeschooled student interested in fine arts,
-              events, testing, or other athletics, visit the{" "}
+              events, testing, or other athletics, visit{" "}
               <a
                 href="https://cfsks.org/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Cornerstone Family School site
-              </a>{" "}
-              for more information.
+                Cornerstone Family Schools
+              </a>
+              .
             </p>
           </div>
         </section>
@@ -982,6 +982,16 @@ function FormsPage() {
             </span>
             <span className="download">
               Open <b>↗</b>
+            </span>
+          </a>
+          <a className="file-row" href="/play-count-sheet.xlsx" download>
+            <span className="file-icon">XLSX</span>
+            <span className="file-name">
+              <strong>Play count &amp; rotation sheet</strong>
+              <small>Sideline snap tracker · rotate every 4–6 downs</small>
+            </span>
+            <span className="download">
+              Download <b>↓</b>
             </span>
           </a>
         </div>
