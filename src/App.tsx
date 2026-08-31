@@ -586,10 +586,10 @@ const schedule: Game[] = [
   {
     day: "11",
     month: "Sep",
-    opponent: "Northland Christian",
-    place: "Away",
-    detail: "Varsity · 7:00 PM",
-    status: "Canceled",
+    opponent: "",
+    place: "Home",
+    detail: "Friday night available",
+    open: true,
   },
   {
     day: "18",
