@@ -572,6 +572,7 @@ const schedule: Game[] = [
     opponent: "KC East",
     place: "Away",
     detail: "Varsity · 7:00 PM",
+    result: "L 10–48",
     status: "Confirmed",
   },
   {
@@ -605,14 +606,6 @@ const schedule: Game[] = [
     place: "Home",
     detail: "Senior Night · Varsity 7:00 PM",
     status: "Confirmed",
-  },
-  {
-    day: "2",
-    month: "Oct",
-    opponent: "",
-    place: "Home",
-    detail: "Friday night available",
-    open: true,
   },
   {
     day: "3",
