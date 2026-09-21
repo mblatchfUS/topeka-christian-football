@@ -563,6 +563,8 @@ type Player = {
   number: string;
   name: string;
   grade: string;
+  status?: "Out";
+  statusDetail?: string;
 };
 
 const schedule: Game[] = [
@@ -628,17 +630,35 @@ const schedule: Game[] = [
 // table below; an empty list renders the "coming soon" state.
 const roster: Player[] = [
   { number: "1", name: "Max Blatchford", grade: "12" },
-  { number: "4", name: "Greyson Jones", grade: "12" },
+  {
+    number: "4",
+    name: "Greyson Jones",
+    grade: "12",
+    status: "Out",
+    statusDetail: "Knee - Practice",
+  },
   { number: "5", name: "Abrahm Tarwater", grade: "12" },
   { number: "7", name: "Desmond Grindal", grade: "12" },
   { number: "9", name: "Levi Hoskinson", grade: "12" },
-  { number: "15", name: "Jaxon Duis", grade: "11" },
+  {
+    number: "15",
+    name: "Jaxon Duis",
+    grade: "11",
+    status: "Out",
+    statusDetail: "Concussion - Practice",
+  },
   { number: "16", name: "Obadiah Hurr", grade: "10" },
   { number: "17", name: "Ethan Lauver", grade: "11" },
   { number: "18", name: "Boone Clark", grade: "9" },
   { number: "20", name: "Easton Cook", grade: "12" },
   { number: "32", name: "Gideon Hawkinson", grade: "11" },
-  { number: "42", name: "Nehemiah Hurr", grade: "11" },
+  {
+    number: "42",
+    name: "Nehemiah Hurr",
+    grade: "11",
+    status: "Out",
+    statusDetail: "Finger against Sunrise",
+  },
   { number: "55", name: "Seamus Mason", grade: "11" },
   { number: "56", name: "Ethan Dinkel", grade: "—" },
   { number: "68", name: "Lee Napier", grade: "12" },
@@ -839,6 +859,14 @@ function SeasonPage() {
                       {player.name}
                       {player.grade === "12" && (
                         <span className="status-tag senior">Senior</span>
+                      )}
+                      {player.status && (
+                        <span className="status-tag out">{player.status}</span>
+                      )}
+                      {player.statusDetail && (
+                        <small className="roster-status-detail">
+                          ({player.statusDetail})
+                        </small>
                       )}
                     </td>
                     <td>{player.grade}</td>
