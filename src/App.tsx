@@ -576,27 +576,12 @@ const schedule: Game[] = [
     status: "Confirmed",
   },
   {
-    day: "4",
-    month: "Sep",
-    opponent: "",
-    place: "Home",
-    detail: "Friday night available",
-    open: true,
-  },
-  {
-    day: "11",
-    month: "Sep",
-    opponent: "",
-    place: "Home",
-    detail: "Friday night available",
-    open: true,
-  },
-  {
     day: "18",
     month: "Sep",
     opponent: "Sunrise",
     place: "Home",
     detail: "Homecoming · Alumni game 5:00 PM · Varsity 7:00 PM",
+    result: "L 36–44",
     status: "Confirmed",
   },
   {
