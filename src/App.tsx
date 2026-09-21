@@ -573,7 +573,6 @@ const schedule: Game[] = [
     place: "Away",
     detail: "Varsity · 7:00 PM",
     result: "L 10–48",
-    status: "Confirmed",
   },
   {
     day: "18",
@@ -582,7 +581,6 @@ const schedule: Game[] = [
     place: "Home",
     detail: "Homecoming · Alumni game 5:00 PM · Varsity 7:00 PM",
     result: "L 36–44",
-    status: "Confirmed",
   },
   {
     day: "25",
@@ -598,7 +596,7 @@ const schedule: Game[] = [
     opponent: "Joplin Cornerstone",
     place: "Away",
     detail: "Time TBA",
-    status: "Pending",
+    status: "Confirmed",
   },
   {
     day: "9",
