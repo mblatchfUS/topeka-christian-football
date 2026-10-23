@@ -598,7 +598,7 @@ const schedule: Game[] = [
     opponent: "Joplin Cornerstone",
     place: "Away",
     detail: "Varsity · 3:00 PM",
-    result: "W (score pending)",
+    result: "W 50–6",
   },
   {
     day: "9",
@@ -606,7 +606,7 @@ const schedule: Game[] = [
     opponent: "Wichita Defenders",
     place: "Away",
     detail: "Varsity · 7:00 PM",
-    result: "L 34–40",
+    result: "L 20–24",
   },
   {
     day: "16",
