@@ -614,7 +614,7 @@ const schedule: Game[] = [
     opponent: "Alumni - Flag Football",
     place: "Home",
     detail: "Senior Night · Varsity 7:00 PM",
-    status: "Confirmed",
+    result: "W 62–46",
   },
   {
     day: "23",
