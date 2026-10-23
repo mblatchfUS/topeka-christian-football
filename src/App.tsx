@@ -589,8 +589,8 @@ const schedule: Game[] = [
     month: "Sep",
     opponent: "Life Prep",
     place: "Home",
-    detail: "Senior Night · Varsity 7:00 PM",
-    status: "Confirmed",
+    detail: "Varsity 7:00 PM · Rained out",
+    status: "Canceled",
   },
   {
     day: "3",
@@ -611,10 +611,10 @@ const schedule: Game[] = [
   {
     day: "16",
     month: "Oct",
-    opponent: "",
+    opponent: "Alumni - Flag Football",
     place: "Home",
-    detail: "Friday night available",
-    open: true,
+    detail: "Senior Night · Varsity 7:00 PM",
+    status: "Confirmed",
   },
   {
     day: "23",
