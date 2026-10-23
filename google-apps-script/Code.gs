@@ -68,9 +68,59 @@ function normalizeName_(name) {
   return name.replace(/\.[^.\s]+$/, '').trim().toLowerCase();
 }
 
+// Abuse limits for the public application endpoint.
+const HONEYPOT_FIELD = 'hpCheck';
+const MAX_FIELD_LENGTH = 200;
+const MAX_ADDRESS_LENGTH = 500;
+const MAX_SUBMISSIONS_PER_HOUR = 20;
+const REQUIRED_FIELDS = [
+  'studentName', 'grade', 'dateOfBirth', 'schoolStatus', 'address',
+  'statementOfFaithInitialOne', 'statementOfFaithInitialTwo',
+  'feeAgreementInitial', 'volunteerInitial', 'parentSignatures', 'sponsorName',
+];
+
+// Keeps only known fields (so arbitrary keys never reach the regex in
+// replaceText or the document) and trims/caps each value.
+function sanitizeValues_(params) {
+  const clean = {};
+  Object.keys(FIELD_LABELS).forEach((field) => {
+    if (params[field] === undefined) return;
+    const limit = field === 'address' ? MAX_ADDRESS_LENGTH : MAX_FIELD_LENGTH;
+    clean[field] = String(params[field]).trim().slice(0, limit);
+  });
+  return clean;
+}
+
+// Global hourly cap so a bot cannot flood Drive or the association's inbox.
+function allowSubmission_() {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const cache = CacheService.getScriptCache();
+    const key = 'submissions-' + Utilities.formatDate(new Date(), 'UTC', 'yyyyMMddHH');
+    const count = Number(cache.get(key) || 0);
+    if (count >= MAX_SUBMISSIONS_PER_HOUR) return false;
+    cache.put(key, String(count + 1), 3600);
+    return true;
+  } finally {
+    lock.releaseLock();
+  }
+}
+
 function doPost(e) {
   try {
-    const values = (e && e.parameter) || {};
+    const params = (e && e.parameter) || {};
+    // Hidden field real users never fill in. Pretend success so bots move on.
+    if (params[HONEYPOT_FIELD]) return json_({ ok: true });
+
+    const values = sanitizeValues_(params);
+    if (REQUIRED_FIELDS.some((field) => !values[field])) {
+      return json_({ ok: false, error: 'Please complete all required fields.' });
+    }
+    if (!allowSubmission_()) {
+      return json_({ ok: false, error: 'Too many submissions right now. Please try again later.' });
+    }
+
     const studentName = values.studentName || 'Unnamed student';
     const timestamp = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd HHmm');
     const outputName = `TCF Participation Application - ${studentName} - ${timestamp}`;
@@ -105,7 +155,8 @@ function doPost(e) {
     try {
       MailApp.sendEmail(APPLICATION_RECIPIENTS, 'TCF application submission FAILED', detail);
     } catch (_) {}
-    return json_({ ok: false, error: String((err && err.message) || err) });
+    // Details go to the association by email only, not back to the caller.
+    return json_({ ok: false, error: 'Something went wrong on our end.' });
   }
 }
 

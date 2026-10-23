@@ -1088,6 +1088,12 @@ function ApplicationPage() {
           </p>
         </div>
         <form className="application-form" onSubmit={submitApplication}>
+          <div className="hp-field" aria-hidden="true">
+            <label>
+              Leave this field empty
+              <input name="hpCheck" tabIndex={-1} autoComplete="off" />
+            </label>
+          </div>
           <fieldset>
             <legend>Student information</legend>
             <label>
