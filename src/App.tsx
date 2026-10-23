@@ -589,8 +589,8 @@ const schedule: Game[] = [
     month: "Sep",
     opponent: "Life Prep",
     place: "Home",
-    detail: "Varsity 7:00 PM · Rained out",
-    status: "Canceled",
+    detail: "Varsity 7:00 PM · Forfeit (field unplayable - rain)",
+    result: "L (Forfeit)",
   },
   {
     day: "3",
