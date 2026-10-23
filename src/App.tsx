@@ -597,8 +597,8 @@ const schedule: Game[] = [
     month: "Oct",
     opponent: "Joplin Cornerstone",
     place: "Away",
-    detail: "Time TBA",
-    status: "Confirmed",
+    detail: "Varsity · 3:00 PM",
+    result: "W (score pending)",
   },
   {
     day: "9",
@@ -606,7 +606,7 @@ const schedule: Game[] = [
     opponent: "Wichita Defenders",
     place: "Away",
     detail: "Varsity · 7:00 PM",
-    status: "Confirmed",
+    result: "L 34–40",
   },
   {
     day: "16",
