@@ -142,3 +142,17 @@ nav { display: flex; align-items: center; gap: clamp(18px, 3vw, 46px); }.nav-lin
 	.coaching-staff { padding: 22px; }
 	.coaching-staff dl { grid-template-columns: 1fr; gap: 18px; }
 }
+
+/* Who's eligible to play (home page, Get in the game) */
+.eligibility { display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; margin-bottom: 70px; padding: 40px; background: #ded8d2; }
+.eligibility h3 { font: 700 35px/1 'Barlow Condensed'; text-transform: uppercase; margin: 22px 0 18px; }
+.eligibility-intro p:last-child { margin: 0; font-size: 14px; line-height: 1.6; color: var(--muted); }
+.eligibility-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); align-self: start; }
+.eligibility-list li { display: grid; gap: 5px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.eligibility-list strong { font: 700 22px 'Barlow Condensed'; text-transform: uppercase; letter-spacing: .3px; }
+.eligibility-list span { font-size: 14px; line-height: 1.5; color: var(--muted); }
+
+@media (max-width: 700px) {
+	.eligibility { display: block; margin-bottom: 45px; padding: 28px 20px; }
+	.eligibility-list { margin-top: 26px; }
+}

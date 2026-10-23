@@ -289,6 +289,38 @@ function HomePage() {
           </div>
           <span className="heading-note">Roster spots are forming now</span>
         </div>
+        <div className="eligibility">
+          <div className="eligibility-intro">
+            <p className="card-kicker">Who’s eligible to play</p>
+            <h3>
+              Homeschool
+              <br />
+              athletes welcome.
+            </h3>
+            <p>
+              Any student that participates in a minimum of 50% parent-directed
+              learning is eligible to play, such as:
+            </p>
+          </div>
+          <ul className="eligibility-list">
+            <li>
+              <strong>Heritage Christian School</strong>
+              <span>Students in the Heritage Christian School program.</span>
+            </li>
+            <li>
+              <strong>NEK</strong>
+              <span>Students in the NEK homeschool organization.</span>
+            </li>
+            <li>
+              <strong>Veritas Christian School</strong>
+              <span>Students in the Veritas Christian School program.</span>
+            </li>
+            <li>
+              <strong>K12 online learning</strong>
+              <span>Homeschool students doing K12 online learning at home.</span>
+            </li>
+          </ul>
+        </div>
         <div className="season-cards">
           <div className="season-card card-image">
             <div className="season-card-photo" />
