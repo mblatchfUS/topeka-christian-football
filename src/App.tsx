@@ -660,8 +660,9 @@ const schedule: Game[] = [
     day: "30",
     month: "Oct",
     opponent: "Sunrise",
-    place: "Home",
-    detail: "Playoff Game 1 · Varsity 4:00 PM",
+    place: "Away",
+    detail:
+      "Playoff Game 1 · Varsity 4:00 PM · 5500 E 45th St N, Bel Aire, KS 67220",
     status: "Confirmed",
   },
 ];
