@@ -654,6 +654,14 @@ const schedule: Game[] = [
     opponent: "Manhattan Eagles",
     place: "Away",
     detail: "Varsity · 7:00 PM",
+    result: "W 50–30",
+  },
+  {
+    day: "30",
+    month: "Oct",
+    opponent: "Sunrise",
+    place: "Home",
+    detail: "Playoff Game 1 · Varsity 4:00 PM",
     status: "Confirmed",
   },
 ];

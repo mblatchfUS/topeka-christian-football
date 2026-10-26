@@ -194,8 +194,3 @@ ws.page_margins.top = ws.page_margins.bottom = 0.4
 ws.print_title_rows = f"{HDR_QTR}:{HDR_NUM}"
 ws.freeze_panes = "D9"
 
-import os
-out = os.path.join(os.path.dirname(__file__), "..", "public", "play-count-sheet.xlsx")
-out = os.path.abspath(out)
-wb.save(out)
-print("wrote", out)
